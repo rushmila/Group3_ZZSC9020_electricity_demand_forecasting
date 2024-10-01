@@ -51,7 +51,7 @@ We hope the findings will assist market participants to make informed decisions 
 Electricity demand forecasting is crucial for ensuring an efficient, reliable and cost-effective power operation systems. Accurate forecasts enable grid operators to balance supply and demand in real-time, preventing costly overproduction or dangerous shortages that could lead to blackouts. It also helps to optimize the scheduling of power generation for different sectors, reducing operational costs and enhancing system reliability. As renewable energy sources like solar and wind become more integrated, forecasting plays a vital role in managing fluctuations in supply. Additionally, in deregulated markets, precise demand predictions allow energy providers to make informed trading decisions, ultimately benefiting both suppliers and consumers with more stable and affordable electricity.
 
 
-According to \cite{nsw_epa_2021_energy_consumption} electricity demand from the NSW grid is projected to experience a slight decline over the next five years before rising more. As stated in the article the main reason for the decline in energy consumption is the lower consumption by the NSW industrial sector, particularly the manufacturing industry, population growth being by improvements in  the energy efficiency of appliances and machinery. In addition, the increasing adoption of rooftop solar panels and battery storage systems is anticipated to further lower residential demand on the electricity grid. Beyond the five-year mark, consumption is forecasted to increase as electric vehicle charging and broader electrification begin to significantly impact electricity demand. In the Figure \ref{renewable} we can visualize the rapid growth of electricity generation using renewable sources.
+According to \cite{nsw_epa_2021_energy_consumption} electricity demand from the NSW grid is projected to experience a slight decline over the next five years before rising more. As stated in the article the main reason for the decline in energy consumption is the lower consumption by the NSW industrial sector, particularly the manufacturing industry, population growth being by improvements in  the energy efficiency of appliances and machinery. In addition, the increasing adoption of rooftop solar panels and battery storage systems is anticipated to further lower residential demand on the electricity grid. Beyond the five-year mark, consumption is forecasted to increase as electric vehicle charging and broader electrification begin to significantly impact electricity demand. In the Figure \ref{renewable} we can visualize the rapid growth of electricity generation using renewable sources. In 2019--20, renewable energy sources accounted for approximately 19% of the state's total electricity generation, a significant increase from past years \cite{nsw_epa_2021_energy_consumption}. Accurate demand prediction is critical for ensuring optimal resource allocation and cost management, particularly as the state integrates more renewable energy into its supply mix.
 
 ```{=tex}
 \begin{figure}[H]
@@ -61,8 +61,6 @@ According to \cite{nsw_epa_2021_energy_consumption} electricity demand from the 
 Derived from Department of the Environment and Energy, Australian Energy Statistics, Table O, June 2021]}\label{renewable}
 \end{figure}
 ```
-
-NSW is predominantly self-sufficient in relation to electricity supply according to \linebreak \cite{nsw_epa_2021_energy_consumption}, relying on state generation to meet local demand with additional electricity is imported from other states through the National Electricity Market (NEM) to optimize costs for the consumers. In 2019--20, renewable energy sources accounted for approximately 19% of the state's total electricity generation, a significant increase from past years. Accurate demand prediction is critical for ensuring optimal resource allocation and cost management, particularly as the state integrates more renewable energy into its supply mix.
 
 ## Factors Affecting Load Forecasting
 
@@ -102,7 +100,7 @@ Researchers used both statistical and probabilistic methods to achieve high accu
 
 -   LTLF: This forecasting method involves time scale ranging from months to even years. LTLF is very important for every production and load growth planning operations for long duration of time. The big advantage of LTLF is that it can remove the effects of random fluctuations occur in short term and make the prediction of long term trends.
 
-As mentioned in \cite{9812604}, there are methods for VSTLF including genetic algorithm, autoregressive moving average models and artificial neural network. STLF is utilized for time hardly from minutes to hours. STLF is the important source of information for daily operations and it is important for system operations. Researchers are taking more interest to design predictive models because STLF can be used to approximate the long time load. It is essential to have accurate predict knowledge of affecting factors to improve short term model. For duration of days to months, usually MTLF is used for load forecasting. It becomes popular in peak summer or winter. For load duration from few weeks to many years, LTLF is considered. The factors including weather data, characteristics of install devices at areas of interest, history of load and numbers of customers are accounted in it. The factors of economic are taken into account for long period methods of load forecasting. The Table \ref{forecasting_methods} \cite{9812604} below shows the different load forecasting methods and their characteristics.
+The Table \ref{forecasting_methods} \cite{9812604} below shows the different load forecasting methods and their characteristics.
 
 ```{=tex}
 \begin{table}[h]
@@ -124,21 +122,21 @@ LTLF & More than year & Simulated & Simulated & Compulsory & Allocation of spinn
 \end{table}
 ```
 
-Based on the required time horizons we can further classify the problem into three broad solution domains - heuristic, statistical or econometric, and probabilistic models. Time series datasets have the unique property of dependence on what happened in the past. Therefore, we cannot randomly shuffle the order of the data without affecting the trends. With such dependency simple regression technique for forecasting can randomly show statistical significance even if there is no true correlation, and thus suitable for real-world usage. In the following sections, we will discuss the popular forecasting models used in the electricity demand forecasting domain.
+Based on the required time horizons we can further classify the problem into three broad solution domains - heuristic, statistical or econometric, and probabilistic models. Timeseries datasets have the unique property of dependence on what happened in the past. Therefore, we cannot randomly shuffle the order of the data without affecting the trends. With such dependency simple regression technique for forecasting can randomly show statistical significance even if there is no true correlation, and thus suitable for real-world usage. In the following sections, we will discuss the popular forecasting models used in the electricity demand forecasting domain.
 
 
 ## Forecasting Models
 
-Various techniques have been developed for electricity demand forecasting during the past few years. Electricity load forecasting models can be classified into parametric, semi-parametric, and non-parametric models based on the assumptions they make about the underlying data distribution and the flexibility in capturing relationships between variables. Parametric models rely on a fixed, predefined functional form with a finite number of parameters. For example linear regression, ARIMA, and exponential smoothing models, assume a specific relationship between predictors (e.g., temperature, time) and load. These models are easy to interpret but less flexible when dealing with complex or non-linear patterns in the data. As discussed in \cite{Fan2012}, statistical models are widely adopted for the load forecasting problem, which include linear regression models, stochastic process models, exponential smoothing and ARIMA models.
+Various techniques have been developed for electricity demand forecasting during the past few years. Electricity load forecasting models can be classified into parametric, semi-parametric, and non-parametric models based on the assumptions they make about the underlying data distribution and the flexibility in capturing relationships between variables. Parametric models rely on a fixed, predefined functional form with a finite number of parameters. As discussed in \cite{Fan2012}, statistical models are widely adopted for the load forecasting problem because of interpretability but less flexible when dealing with complex or non-linear patterns in the data.
 
 Semi-parametric models, such as Generalized Additive Models (GAMs), combine both parametric and non-parametric components. They allow for linear relationships between some variables while using smoothing functions to capture non-linear effects, offering a balance between interpretability and flexibility. A more recent and very popular GAM for regression technique is Prophet \cite{taylor2017facebook}. It is designed to optimally handle business forecasting tasks featuring time series captures at the hourly, daily, or weekly level with ideally at least a full year of historical data.
 
-Finally, non-parametric models like Random Forests, Support Vector Regression (SVR), k-Nearest Neighbors, and Artificial Neural Networks (ANN) do not assume any specific form for the relationship between inputs and outputs. These models are highly flexible and can model complex, non-linear interactions but are more computationally intensive and can be harder to interpret compared to their parametric counterparts. Each class of models has it's strengths, with the choice depending on the data complexity and the forecasting objectives. Recently, machine learning techniques and fuzzy logic approaches have also been used for load forecasting or classification and achieved relatively good performances. ANN have been shown to have the ability not only to learn the load series but also to model an unspecified nonlinear relationship between load and weather variables. 
+Finally, Non-parametric models like Random Forests, SVR, k-Nearest Neighbors, and ANNs can capture complex, non-linear relationships but are computationally intensive and harder to interpret. Machine learning techniques, including ANNs, have shown success in load forecasting by modeling non-linear interactions between load and weather variables. 
 
 
 ```{=tex}
 \begin{table}[h]
-  \caption{Forecasting methods}\label{tab:forecasting_methods1}
+  \caption{Forecasting methods}\label{tab:forecasting_methods}
     \scalebox{0.9}{
     \centering
     \begin{tabular}{|c|p{5cm}|p{6cm}|} % 'p{5cm}' specifies the column width
@@ -165,14 +163,29 @@ Finally, non-parametric models like Random Forests, Support Vector Regression (S
         Quick and accurate execution.& 
         Numerical instability.\\ 
         \hline
+        RNN &
+        Can handle sequential data and effective in predict short term fluctuations. &
+        Vanishing gradient problem, overfitting, slow training process.\\
+        \hline
+        LSTM &
+        Can handle short-term and medium-term forecasting as it stores information in memory cell. &
+        Overfitting, slow training process, requires significant computational resources.\\
+        \hline
+        GAMs &
+        Can capture non-linear relationships between demand and influencing variables. &
+        Less effective for long-term forecasting.\\
+        \hline
+        XGBoost &
+        Efficient in handling large dataset and model complex non-linear relationships. &
+        Requires hyper-parameter tuning.\\
+        \hline
     \end{tabular}
     }
     %\caption{Example of Text Wrapping in a LaTeX Table}
 \end{table}
 ```
 
-
-Now, let's examine which models are most appropriate for different forecasting problems based on the time horizon involved. For short-term forecasting, covering hours to a few days, models that integrate external factors such as weather conditions, time of day, and social behaviour become critical. Generalized Additive Models (GAMs) and Support Vector Machines (SVMs) are often applied for their ability to account for non-linear relationships between demand and influencing variables like temperature, day of the week, and holidays. Hybrid models, which combine machine learning techniques with statistical methods like exponential smoothing or seasonal ARIMA, are also effective for this timeframe, as they can capture both the short-term trends and seasonal patterns inherent in electricity consumption.\newline \cite{Wang2021} highlights that although these traditional techniques such as fuzzy linear regression, exponential smoothing, Automatic Regressive Moving Average (ARMA) have the advantages of algorithmic simplicity but they are not scalable to handle large dataset and model complicated relationships. Popular machine learning model XGBoost is widely regarded as a powerful tool for short-term load forecasting due to its ability to handle large dataset and model complex non-linear relationships efficiently. Studies have demonstrated that XGBoost can outperform traditional neural networks in terms of both accuracy and computational speed, especially when dealing with tabular data, such as historical electricity demand [???Ref].  **RNNs** are commonly used for load forecasting when there is a need to model temporal dependencies over shorter sequences. They are effective in predicting short-term fluctuations in electricity demand, especially when there is a clear trend or pattern over recent time intervals, such as hourly or daily demand variations. However, traditional RNNs suffer from the vanishing gradient problem, which limits their ability to retain information over long time sequences. This makes them less effective for capturing long-term dependencies or seasonal patterns in electricity consumption. To overcome the limitations of RNNs, **LSTM networks** are often preferred for load forecasting, especially when dealing with longer time horizons or when it's important to capture both short-term and long-term trends in electricity demand. LSTM networks are designed with a memory cell that can store information for extended periods, allowing the model to retain past information over long time sequences. This makes LSTMs particularly effective for **short-term to medium-term forecasting**, where demand patterns depend on both recent trends (such as hourly or daily fluctuations) and more distant patterns (such as weekly or seasonal cycles). One of the main shortcomings of using LSTM in short-term load forecasting is its tendency to overfit when the model complexity increases, especially with limited training data. Additionally, LSTM models often require significant computational resources and long training times, which can be less efficient for real-time applications where immediate predictions are crucial [???REF]. Medium-term forecasting, which spans weeks to months, focuses on predicting consumption patterns based on broader trends, such as seasonal variations, economic cycles, and energy market dynamics. Time-series models like SARIMA (Seasonal ARIMA) and Exponential Smoothing State Space (ETS) models are widely used for their ability to capture seasonal effects and trends. Additionally, machine learning techniques like Gradient Boosting Machines (GBM) or Random Forests can be leveraged to include more complex interactions between variables, such as the effect of emerging technologies like rooftop solar panels. These models are crucial for tasks such as planning maintenance or scheduling energy generation resources. For long-term electricity demand forecasting, **econometric models** and **scenario based models** are often preferred over short-term forecasting methods like neural networks. This is because long-term forecasting, which spans months to years, requires capturing structural trends, external factors, and macroeconomic indicators that influence electricity demand over extended periods.
+Table \ref{forecasting_methods} shows the different forecasting methods and their advantages and disadvantages. As we can see, each method has its own strengths and weaknesses, and the choice of model depends on the specific requirements of the forecasting problem.
 
 ## Challenges to Find the Ideal Electricity Load Forecasting Method
 
@@ -228,15 +241,7 @@ List of libraries used are,
 Jupyter Notebook and RStudio was used as integrated development environments. Github repository was used for code management. Teams and One Drive were used for collaboration and communication.
 
 ## Description of the Data
-
-```{=tex}
-\begin{enumerate}
-    \item Total Electricity Demand NSW
-    \item Air Temperature NSW
-    \item NSW Calendar
-    \item Total Forecast Demand NSW
-\end{enumerate}
-```
+In this section, we provide a detailed description of the datasets used in this study.
 
 ### Total Electricity Demand NSW
 
@@ -434,22 +439,18 @@ Lets begin by analyzing the data to understand its characteristics.
 
 Analysis of the electricity demand over the years would help identify historic trends and any seasonal effects. As a start, lets review average, Minimum and Maximum demand fluctuation over the years.
 
-
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-2-1} \end{center}
-
-It is evident that the the average demand has reduced or flat lined over the years. We were expecting the demand to rise with the population growth over the years. Therefore, it would be prudent use latest available data for model build as we are focusing on short term demand. 
-
-The minimum and maximum demand seem to fluctuate within a range and does not indicate any significant trends.
-
-\textit{Note: A potential reason for decrease in demand could be the increase use of roof top solar panels. Below Fig \ref{fig:Solar PV Installation} from Australian PV Institute \url{https://pv-map.apvi.org.au/analyses} shows a clear increase in Solar panel installation. However further research is required to confirm any relationship.}
-
 ```{=tex}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth, height=5cm]{AusPVInst.PNG}
-\caption{Yearly Solar PV Installation}\label{fig:Solar PV Installation}
+\includegraphics[width=0.80\textwidth,height=5cm]{demand_stats.png}
+\caption{Yearly Demand Statistics}
+\label{demand_stats}
 \end{figure}
 ```
+
+It is evident that in the Figure \ref{demand_stats} average demand has reduced or flat lined over the years. We were expecting the demand to rise with the population growth over the years. Therefore, it would be prudent use latest available data for model build as we are focusing on short term demand. 
+
+The minimum and maximum demand seem to fluctuate within a range and does not indicate any significant trends.
 
 ## Decompose Time series
 
@@ -463,10 +464,16 @@ Time series data can be decomposed to four components. \cite{brownlee_2017_how}
   \item Noise - The random variation in the series.
 \end{itemize}
 
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth,height=6cm]{time_series_conversion.png}
+\caption{Time Series Decomposition}
+\label{time_series_conversion}
+\end{figure}
+```
 
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-3-3} \end{center}
-
-The Level and Trend plots both show gradual decline in demand similar to what we observed earlier. The seasonal plot shows the peaks and troughs in a repetitive pattern. This maybe due to relative high usage of electricity during Winter (for heating) and Summer (for cooling) compared to Spring and Autumn.
+The Level and Trend plots both show gradual decline in demand similar to what we observed earlier. In the Figure \ref{time_series_conversion} the seasonal plot shows the peaks and troughs in a repetitive pattern. This maybe due to relative high usage of electricity during Winter (for heating) and Summer (for cooling) compared to Spring and Autumn.
 
 Further, to verify that the data set used is suitable for time series analysis we perform a stationarity test using ADF (Augmented Dickey-Fuller).
 
@@ -501,8 +508,14 @@ Based on the results we can observe that the test statistic is lower than the cr
 
 Lets analyse the impact of demand based on the month. 
 
-
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-5-5} \end{center}
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth,height=6cm]{monthly_heat.png}
+\caption{Monthly Demand Heatmap}
+\label{monthly_heat.png}
+\end{figure}
+```
 
 We tend to use heating during winter months and cooling during summer. The heatmap clearly indicates that June, July, August winter months and January, February Summer months have a higher average demand for electricity. Conversely Spring and Autumn has a lower average demand. Therefore the month/season should be considered for the model build.
 
@@ -511,16 +524,28 @@ We tend to use heating during winter months and cooling during summer. The heatm
 
 Next we analyse whether the electricity demand fluctuate depending on the day of the week. As per the heatmap, weekends tend to have lower demand. This could be due to the fact that most offices, factories are closed during the weekend. Also, many people tend to spend weekends outside. Similar to month, day of the week seems to have an influence on the demand. Hence suitable to be included in the model build.
 
-
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-6-7} \end{center}
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth,height=6cm]{day_heat.png}
+\caption{Day of the Week Demand Heatmap}
+\label{day_heat}
+\end{figure}
+```
 
 ## Demand on Holidays
 
 Extending on the day of the week demand, we would like to analyse the difference in average demand between holidays and non-holidays.
 For the purpose of the analysis, we consider Public holidays and weekends as \textit{Holidays} and all the other days as non-holidays.
 
-
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-7-9} \end{center}
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth,height=6cm]{day_demand.png}
+\caption{Mean Demand Holiday vs Non-Holiday}
+\label{day_demand}
+\end{figure}
+```
 
 The graph clearly indicate a significant difference in mean demand between holidays and non-holidays. As noted previously for Saturday and Sunday, this may be due the fact that offices, factories not operating over holidays resulting in lower demand. Therefore we could conclude that holidays has a impact on the overall demand and therefore should be considered in the model.
 
@@ -528,8 +553,14 @@ The graph clearly indicate a significant difference in mean demand between holid
 
 At the next granular level, we would like to observe how demand fluctuates within a day (hour by hour). Australian energy providers broadly segregates hourly demand to three groups \cite{wrigley_2019_peak}. Peak, off-peak and shoulder. There are variations of this by providers. For our analysis purposes, we would simplify to Peak and Off-peak only.
 
-
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-8-11} \end{center}
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth,height=6cm]{hour_heat.png}
+\caption{Hourly Demand Heatmap}
+\label{hour_heat}
+\end{figure}
+```
 
 As evident from the graph, approx from 7:00 AM to 10:00 PM, the demand seems to be high. Therefore we would use that period as Peak demand and rest as off-peak demand for our model build.
 
@@ -537,8 +568,14 @@ As evident from the graph, approx from 7:00 AM to 10:00 PM, the demand seems to 
 
 Based on previous analysis, lets verify the variations in demand based on Peak hours vs off-peak. Additionally, we further drill-down on holidays vs non-holidays. 
 
-
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-9-13} \end{center}
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth,height=6cm]{holiday_nonholiday.png}
+\caption{Peak vs Off-Peak Demand on Holiday vs Non-Holiday}
+\label{holiday_nonholiday}
+\end{figure}
+```
 
 
 The graphs clearly indicate the difference in demand between peak and off-peak hours. This pattern is visible both during non-holidays and holidays. Therefore we should consider Peak/Off-Peak demand in the model build.
@@ -558,7 +595,14 @@ The above is a first order autoregressive model. Meaning only one proceeding val
 The autocorrelation function (ACF) is given as, $Corr(y_t,y_{t-k}),k=1,2,..n$ \cite{nist_2020_13512} where k is the time gap or the lag between values of the same variable. We are interested in Partial Autocorrelation, which measure the association between $y_t$ and $y_{t-k}$ directly and filter out the linear influence of the random variables that lie in between. PACF is useful to identify the order of autocorrelation.
 
 
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-10-15} \end{center}
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth,height=6cm]{autocorrelation.png}
+\caption{Autocorrelation and Partial Autocorrelation}
+\label{autocorrelation}
+\end{figure}
+```
 
 The ACF plot seems to indicate cyclical pattern and this could be due to seasonality effect on the demand data. It also seem to highlight high correlation between adjacent data points. 
 
@@ -569,22 +613,42 @@ The PACF graph shows significant spike in lag 1,2 and 3 but seems to decay as it
 
 The relationship between temperature and electricity demand is well known. In below grpah, as the temperature increase, it is clearly evident that demand increases. However it is interesting to note that when temperature decreases, especially below 10 degrees, we see a limited spike in demand. Potential reason could be that in NSW temperature falls mostly during the night / early morning and therefore consumers do not necessarily need heating. However the high temperatures are mostly during day time and as a result people use electricity for cooling driving up the demand. 
 
-
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-11-17} \end{center}
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth,height=6cm]{temperature_demand.png}
+\caption{Temperature vs Demand}
+\label{temperature_demand}
+\end{figure}
+```
 
 ## Correlation matrix
 
 Finally we look at the correlation between the attributes. The graph below shows very low correlation between Total Demand and Temperature. This may be due to the fact that the relationship is non-linear. Similarly, Holiday and Month seems to have little or no correlation with respect to demand. Hour and Peak/off-peak in turn seems to have higher correlation.
 
 
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-12-19} \end{center}
+
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth,height=6cm]{correlation_matrix.png}
+\caption{Correlation Matrix}
+\label{correlation_matrix}
+\end{figure}
+```
 
 ## Covid impact on Demand
 
 Since the dataset used overlaps with the Covid period, it is important to understand if there is any impact on overall demand. 
 
-
-\begin{center}\includegraphics[width=0.8\linewidth]{unsw-ZZSC9020-report-group3_files/figure-latex/unnamed-chunk-13-21} \end{center}
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth,height=6cm]{covid_impact.png}
+\caption{Covid impact on Demand}
+\label{covid_impact}
+\end{figure}
+```
 
 The plot does not indicate any significant deviations in the demand. One could conclude that 2020 Covid period had minimal impact on overall demand based on the graph. However, further research is warranted to confirm the finding.
 
@@ -752,16 +816,10 @@ XGBoost and Facebook Prophet had lower errors compared to the AEMO forecast mode
 ## Facebook Prophet
 
 ### Why Prophet and How it works
-Prophet was developed internally at Facebook (now known as Meta) by Sean J. Taylor and Ben Letham to overcome two issues often encountered with other forecasting methodologies: the more automatic forecasting tools available tended to be too inflexible and unable to accommodate additional assumptions, and the more robust forecasting tools required an experienced analyst with specialized data science skills. Facebook experienced too much demand for high-quality business forecasts than their analysts were able to provide. In 2017, Facebook released Prophet to the public as open source software.
+Prophet was developed internally at Facebook (now known as Meta) by Sean J. Taylor and Ben Letham  to optimally handle business forecasting tasks, which typically features multiple seasonality, missing data, and outliers \cite{taylor2017facebook}. Prophet is a decomposable time series model with three main components: trend, seasonality, and holidays. The trend component models non-periodic changes in the value of the time series. The seasonality component models periodic changes in the value of the time series. The holiday component models the effects of holidays that occur on potentially irregular schedules over one or more days. The model is fitted to historical data, and future data is forecasted using the model. The model is highly customisable, allowing users to adjust the model to fit their data and business needs.
 
-Prophet was designed to optimally handle business forecasting tasks, which typically feature any of these attributes: 
-- Time series data captured at the hourly, daily, or weekly level with ideally at least a full year of historical data - Strong seasonality effects occurring daily, weekly, and or yearly 
-- Holidays and other special one-time events that don’t necessarily follow the seasonality patterns but occur irregularly - Periods of missing data or outliers 
-- Historical trend changes, for instance due to product launches or other factors that may affect the forecast
 
-Out of the box, Prophet typically produces very high-quality forecasts, but it is also very customizable and approachable for data analysts with no prior expertise in time series data. Prophet is an additive regression model that forecasts time series data by summing several key components. These include a linear or logistic growth trend, annual, weekly, and daily seasonality curves, holidays and special events, and additional user-specified seasonality factors like hourly or quarterly patterns. Each component is added together to create a flexible and interpretable forecasting model.
-
-Taylor and Letham \cite{taylor2017facebook} proposed a modular regression model with interpretable parameters that can be intuitively adjusted by analysts with domain knowledge about the time series. The automatic ARIMA forecasts are prone to large trend errors when there is a change in trend near the cutoff period and they fail to capture any seasonality. The exponential smoothing and seasonal naive forecasts capture weekly seasonality but miss longer-term seasonality. All of the methods overreact to the end-of-year dip because they do not adequately model yearly seasonality. In the proposed model as named Prophet, they use a decomposable time series model ??? (Harvey and Peters 1990) with three main model components: trend, seasonality, and holidays. They are combined in the following equation:
+Taylor and Letham \cite{taylor2017facebook} proposed a modular regression model with interpretable parameters that can be intuitively adjusted by analysts with domain knowledge about the time series. The automatic ARIMA forecasts are prone to large trend errors when there is a change in trend near the cutoff period and they fail to capture any seasonality. The exponential smoothing and seasonal naive forecasts capture weekly seasonality but miss longer-term seasonality. All of the methods overreact to the end-of-year dip because they do not adequately model yearly seasonality. In the proposed model as named Prophet, they use a decomposable time series model with three main model components: trend, seasonality, and holidays. They are combined in the following equation:
 
 $$
 y(t) = g(t) + s(t) + h(t) + \epsilon_t
@@ -929,7 +987,7 @@ The Fig \ref{prophet_actual_predict_output} shows the forecast for 17 days for M
 \caption{Actual vs Predicted demand: Prophet model Prophet}\label{prophet_actual_predict_output}
 \end{figure}
 ```
-The residual plot in ???
+
 
 ```{=tex}
 \begin{figure}[H]
@@ -955,6 +1013,17 @@ The models we built focus on short intervals. AEMO model might be optimised for 
 
 Our models are optimised for a specific time window (30 minutes). Thus, they are suited to detecting patterns in that period. A more general model might need help with extreme cases like sharp demand spikes or sudden peak-hour drops. This could explain why our model performed better, but this comes at the cost of model forecast period flexibility. Our model will struggle if used to forecast a long-time horizon compared to the AEMO model.
 
+The Fig \ref{AEMO_Prophet_XGBoost} shows the comparison of the forecasted demand among AEMO, XGBoost, and Prophet models. The XGBoost model follows the actual demand more closely than the Prophet and AEMO model. 
+
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth, height=5cm]{AEMO_Prophet_XGBoost.png}
+\caption{Forecast demand comparison among AEMO, XGBoost and Prophet}\label{AEMO_Prophet_XGBoost}
+\end{figure}
+```
+
+
 # Conclusion and Future Work {.label:ccl}
 
 We built, tested, and compared two popular machine-learning models: XGBoost and Facebook Prophet. XGBoost is highly flexible and known for its high accuracy in many domains, while Facebook Prophet is a time-series-specific model that excels in capturing trends. The goal is to see how these different models forecast short-term electricity demand. 
@@ -964,7 +1033,6 @@ We found that both models performed well with very close results. Facebook Proph
 We also compared the two models with the AEMO forecast to benchmark our performance against industry standards, and our models performed better. However, we do not suggest that our models are superior to AEMO. There are many valid time horizons for electricity demand forecasting where the current AEMO model will outperform the models we build. We trained our model on a specific dataset, while the AEMO model is trained on more extensive and complex data. The AEMO model is also built to handle various scenarios. However, our model is built for one specific scenario.
 
 The results highlight how tailoring a model to a specific forecasting problem can improve accuracy. By creating particular models, we can better address electricity demand's short-term, high-frequency nature. This report emphasises the importance of customisation in forecasting models. Comparing multi-use multi-timeframe models and single-use case models is work that needs to be done in the future, along with incorporating the impact of photovoltaic systems and population and economic growth.
-
 
 
 # References {.unnumbered}
