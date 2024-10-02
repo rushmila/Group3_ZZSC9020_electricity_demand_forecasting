@@ -38,15 +38,13 @@ matplotlib$use("Agg", force = TRUE)
 
 # Introduction {.label:s-intro}
 
-Accurate Electricity demand forecasting is a fundamental component of decision making for governments, regulatory bodies and businesses. To forecast electricity demand we need to understand the drivers of demand fluctuation and corresponding relationships. Weather changes, long-term climate change and macroeconomic influences such as, population growth, economic growth are key factors that influence demand \cite{a2024_nem}. Additionally, generation of electricity through renewable sources such as Solar and Wind which doubled over the last decade has added more complexity to forecasting due to its dependency on weather  \cite{energygovau_2024_renewables}.
+Accurate electricity demand forecasting is a fundamental component of decision making for governments, regulatory bodies and businesses. To forecast electricity demand we need to understand the drivers of demand fluctuation and corresponding relationships. Weather changes, long-term climate change and macroeconomic influences such as population growth, economic growth are key factors that influence demand \cite{a2024_nem}. Additionally, the generation of electricity through renewable sources such as solar and wind which doubled over the last decade has added more complexity to forecasting due to its dependency on weather \cite{energygovau_2024_renewables}. 
 
-The demand forecasting varies from short term to medium and long term. The parameters that influence each period type varies. Short term forecasting focus on small time intervals. i.e. few minutes upto few days. It can be heavily influenced by daily weather, time of the day and holidays. In case of medium to long term forecast, the timeframe could vary from few months to few years into the future and determined by long term factors such as climate change, population growth, government policy to name a few. 
+Demand forecasting varies from short to medium and long term. The parameters that influence each period type also varies. Short term forecasting focus on small time intervals. i.e. few minutes to days. It can be heavily influenced by daily weather, time of the day and holidays. In case of medium to long term forecast, the timeframe could vary from few months to years into the future and determined by long term factors such as climate change, population growth, government policy to name a few. 
 
-This research paper focus on short term forecasting. Therefore, primarily use half hourly temperature, historical half hourly actual demand, calendar information (holidays, weekends) and time of the day as key data sources. We analyse in detail the relationship between demand and the aforementioned features and use two models, \textbf{XGBoost} and \textbf{Prophet by Facebook} to forecast daily demand. 
+This research focuses on \textbf{short-term} forecasting. Therefore, we primarily use half hourly temperature, historical half hourly actual demand, calendar information (holidays, weekends) and time of the day as key data sources. We analyse in detail the relationship between demand and the aforementioned features and use two models, \textbf{XGBoost} and \textbf{Prophet by Facebook} to forecast half hourly daily demand. By using multiple metrices, we compare the performance of each model. Additionally, we also compare the results of the two models against the short-term demand forecast published by Australian Energy Market Operator.
 
-By using multiple matrices, we compare the performance of each model. Additionally, we also compare the results of the two models against the short-term demand forecast published by Australian Energy Market Operator.
-
-We hope the findings will assist market participants to make informed decisions with regards to short term electricity demand forecasting and contribute to a more sustainable and efficient energy landscape.
+We beleive the findings will assist market participants to make informed decisions with regards to short-term electricity demand forecasting and contribute to a more sustainable and efficient energy landscape.
 
 \bigskip
 
@@ -57,29 +55,17 @@ We hope the findings will assist market participants to make informed decisions 
 Electricity demand forecasting is crucial for ensuring an efficient, reliable and cost-effective power operation systems. Accurate forecasts enable grid operators to balance supply and demand in real-time, preventing costly overproduction or dangerous shortages that could lead to blackouts. It also helps to optimize the scheduling of power generation for different sectors, reducing operational costs and enhancing system reliability. As renewable energy sources like solar and wind become more integrated, forecasting plays a vital role in managing fluctuations in supply. Additionally, in deregulated markets, precise demand predictions allow energy providers to make informed trading decisions, ultimately benefiting both suppliers and consumers with more stable and affordable electricity.
 
 
-According to \cite{nsw_epa_2021_energy_consumption} electricity demand from the NSW grid is projected to experience a slight decline over the next five years before rising more. As stated in the article the main reason for the decline in energy consumption is the lower consumption by the NSW industrial sector, particularly the manufacturing industry, population growth being by improvements in  the energy efficiency of appliances and machinery. In addition, the increasing adoption of rooftop solar panels and battery storage systems is anticipated to further lower residential demand on the electricity grid. Beyond the five-year mark, consumption is forecasted to increase as electric vehicle charging and broader electrification begin to significantly impact electricity demand. In the Figure \ref{renewable} we can visualize the rapid growth of electricity generation using renewable sources. In 2019--20, renewable energy sources accounted for approximately 19% of the state's total electricity generation, a significant increase from past years \cite{nsw_epa_2021_energy_consumption}. Accurate demand prediction is critical for ensuring optimal resource allocation and cost management, particularly as the state integrates more renewable energy into its supply mix.
+According to \cite{nsw_epa_2021_energy_consumption} electricity demand from the NSW grid is projected to experience a slight decline over the next five years before rising more. As stated in the article the main reason for the decline in energy consumption is the lower consumption by the NSW industrial sector, particularly the manufacturing industry, population growth being by improvements in  the energy efficiency of appliances and machinery. In addition, the increasing adoption of rooftop solar panels and battery storage systems is anticipated to further lower residential demand on the electricity grid. Beyond the five-year mark, consumption is forecasted to increase as electric vehicle charging and broader electrification begin to significantly impact electricity demand. In 2019--20, renewable energy sources accounted for approximately 19% of the state's total electricity generation, a significant increase from past years \cite{nsw_epa_2021_energy_consumption}. Accurate demand prediction is critical for ensuring optimal resource allocation and cost management, particularly as the state integrates more renewable energy into its supply mix.
 
-```{=tex}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth,height=10cm]{renewable_fuel_sources_chart.png}
-\caption{Renewable fuel sources [Source:
-Derived from Department of the Environment and Energy, Australian Energy Statistics, Table O, June 2021]}\label{renewable}
-\end{figure}
-```
 
 ## Factors Affecting Load Forecasting
 
-Load forecasting is usually concerned with the prediction of hourly, daily, weekly, and annual values of the system demand and peak demand. Such forecasts are sometimes categorized as short-term, medium-term and long-term forecasts, depending on the time horizon. In terms of forecasting outputs, load forecasts can also be categorized as point forecasts (i.e., forecasts of the mean or median of the future demand distribution), and density forecasts (i.e., estimates of the full probability distributions of the possible future demand values).
-
-As stated in \cite{nsw_epa_2021_energy_consumption} the driving factors of electricity consumption and demand forecasts can be split into two different types: ---1) structural like population growth, economic condition, electricity price, energy efficiency etc; and 2) non-structural or random like weather condition e.g., air temperature, extreme heat or cold, bushfire, flood, etc., building type e.g., multi-storey or free-standing house, and adoption of electric vehicles and contributions of renewable energy in the power grid, etc. There are many factors that drive consumers to make similar choices regarding electricity consumption at the same time like work and school schedules. The demand is different during weekdays, public holidays, weekends, due to weather the use of heating and cooling appliances, and many other societal factors, such as whether the beach is pleasant, or the occurrence of retail promotions.
-
-Temperature is a crucial factor, as it directly influences electricity consumption patterns. Extreme temperatures, whether very hot or cold, can lead to higher demand for heating or cooling, respectively. Forecasts often need to account for temperature variations to predict demand more accurately, especially during seasonal extremes or unusual weather patterns.
+Load forecasting is usually concerned with the prediction of hourly, daily, weekly, and annual values of the system demand and peak demand. Such forecasts are sometimes categorized as short-term, medium-term and long-term forecasts, depending on the time horizon. In terms of forecasting outputs, load forecasts can also be categorized as point forecasts (i.e., forecasts of the mean or median of the future demand distribution), and density forecasts (i.e., estimates of the full probability distributions of the possible future demand values). As stated in \cite{nsw_epa_2021_energy_consumption} the driving factors of electricity consumption and demand forecasts can be split into two different types: ---1) structural like population growth, economic condition, electricity price, energy efficiency etc; and 2) non-structural or random like weather condition e.g., air temperature, extreme heat or cold, bushfire, flood, etc., building type e.g., multi-storey or free-standing house, and adoption of electric vehicles and contributions of renewable energy in the power grid, etc. There are many factors that drive consumers to make similar choices regarding electricity consumption at the same time like work and school schedules. The demand is different during weekdays, public holidays, weekends, due to weather the use of heating and cooling appliances, and many other societal factors, such as whether the beach is pleasant, or the occurrence of retail promotions. Temperature is a crucial factor, as it directly influences electricity consumption patterns. Extreme temperatures, whether very hot or cold, can lead to higher demand for heating or cooling, respectively. Forecasts often need to account for temperature variations to predict demand more accurately, especially during seasonal extremes or unusual weather patterns.
 
 ```{=tex}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth, height=10cm]{extreme_temp__au.png}
+\includegraphics[width=0.95\textwidth, height=7cm]{extreme_temp__au.png}
 \caption{The frequency of extreme heat events in Australia from 2010 to 2020}\label{extreme}
 \end{figure}
 ```
@@ -87,18 +73,20 @@ Temperature is a crucial factor, as it directly influences electricity consumpti
 Figure \ref{extreme} shows the overall temperature rise in Australia and forecast shows that it will continue to rise. The climate of NSW is changing, with 6 of the 10 warmest years on record occurring in the past 10 years \cite{nswAdaptNSW}. The warmest year on record in NSW was 2019, with on average temperature of 1.2°C above the 1990--2009 average. Across NSW, average temperatures will continue to increase throughout this century and by 2090, average temperature is projected to rise by around 1.3°C under a low emissions scenario and around 4.0°C under a high emissions scenario. So temperature is key factor while determining the electricity demand as fluctuations in heating and cooling usage drive consumption patterns. Colder nights lead to increased heating, while hot days cause a spike in cooling system usage. These variations directly impact electricity demand, making accurate short-term forecast is very crucial for grid operators to manage supply and demand effectively.
 
 
-Holidays and weekdays are also important key factors in load forecasting. On holidays, electricity consumption patterns can differ significantly from regular weekdays due to changes in work routines and social activities. For instance, public holidays might see a decrease in commercial and industrial electricity use, while residential usage could increase due to family gatherings and home activities. 
+Holidays and weekdays are also important key factors in load forecasting. On holidays, electricity consumption patterns can differ significantly from regular weekdays due to changes in work routines and social activities. For instance, public holidays might see a decrease in commercial and industrial electricity use, while residential usage could increase due to family gatherings and home activities. Incorporating temperature data and considering holiday effects are essential for creating more accurate and reliable electricity demand forecasts, which in turn support better decision-making for power system management and operational planning.
 
-Incorporating temperature data and considering holiday effects are essential for creating more accurate and reliable electricity demand forecasts, which in turn support better decision-making for power system management and operational planning.
+\bigskip
 
 ## Electricity Demand Forecast Methodologies
 
-Electricity demand or load forecasting is a well-known problem that involves predicting future load based on historical information. Econometric models and time series models are the most commonly used classical load forecasting techniques. These approaches rely on past observations to project future demand. As mentioned in \cite{9812604} econometric approach combines statistical techniques with economic theory to estimate the relationship between influencing factors and energy consumption, enabling a deeper understanding of how various factors - such as economic conditions and weather - impact electricity demand across industrial, residential, and commercial sectors. The econometric approach uses historical data to provide comprehensive insights into future trends and the reasons behind them. However, despite its advantages, it may not fully capture the interdependence between quantity and prices, limiting its forecasting accuracy in certain cases. On the other hand, time series models focus on analyzing historical load data to identify patterns and predict future values based solely on past trends. These models offer structural simplicity, as they rely entirely on previous observations to forecast future demand. While effective for forecasting, they do not explain cause and effect relationships between variables, thus limiting their ability to account for changes in underlying factors.
+Electricity demand or load forecasting is a well-known problem that involves predicting future load based on historical information. Econometric models and time series models are the most commonly used classical load forecasting techniques. These approaches rely on past observations to project future demand. As mentioned in \cite{9812604} econometric approach combines statistical techniques with economic theory to estimate the relationship between influencing factors and energy consumption, enabling a deeper understanding of how various factors - such as economic conditions and weather - impact electricity demand across industrial, residential, and commercial sectors. The econometric approach uses historical data to provide comprehensive insights into future trends and the reasons behind them. Despite its advantages, it may not fully capture the interdependence between quantity and prices, limiting its forecasting accuracy in certain cases. On the other hand, time series models focus on analyzing historical load data to identify patterns and predict future values based solely on past trends. These models offer structural simplicity, as they rely entirely on previous observations to forecast future demand. While effective for forecasting, they do not explain cause and effect relationships between variables, thus limiting their ability to account for changes in underlying factors.
+
+\bigskip
 
 Researchers used both statistical and probabilistic methods to achieve high accuracy with low errors to find the best model. They also considered this problem as both deterministic and stochastic to include the influence of the external factors that sways the models behavior at different time horizons. As mentioned in \cite{9812604} load forecasting on the basis of time horizon, can be classified into four forecasting groups -- VSLTF (very short-term load forecasting), STLF (short-term load forecasting), MTLF (medium-term load forecasting), and LTLF (long-term load forecasting). 
 
 
--   VSTLF: This is used to forecat from minutes to hour (0-3h). It can deal with random variations in renewable energy production and demand. It is used for the purpose of real-time operation and control of the grid. 
+-   VSTLF: This is used to forecsat from minutes to hour (0-3h). It can deal with random variations in energy production and demand. It is used for the purpose of real-time operation and control of the grid. 
 
 -   STLF: This method is used for forecasting ahead of few minutes to few days. It has a key role in different grid operations involving reliability analysis and dispatch analysis. Further, it helps to avoid over estimation and under estimation of the energy demand and thus contribute substantially in the reliability of grid.
 
@@ -106,48 +94,29 @@ Researchers used both statistical and probabilistic methods to achieve high accu
 
 -   LTLF: This forecasting method involves time scale ranging from months to even years. LTLF is very important for every production and load growth planning operations for long duration of time. The big advantage of LTLF is that it can remove the effects of random fluctuations occur in short term and make the prediction of long term trends.
 
-The Table \ref{forecasting_methods} \cite{9812604} below shows the different load forecasting methods and their characteristics.
-
-```{=tex}
-\begin{table}[h]
-\caption{Forecasting methods}
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tabular}{c|c|c|c|c|c}
-\hline \hline
- &  &  & Factors &  &  \\ 
-
-Methods &  Time  Duration &  Temperature & Economics & Use of land & Usases \\ \hline
-VSTLF & Few minutes & Not compulsory & Not compulsory & Not compulsory & To generate forecasting. \\ \hline
-STLF & Few hours & Compulsory & Not compulsory & Not compulsory & Distribution schedule. \\ \hline
-MTLF & Days to months & Simulated & Compulsory & Not compulsory & Maintenance schedule. \\ \hline
-LTLF & More than year & Simulated & Simulated & Compulsory & Allocation of spinning reserve. \\ \hline
-\end{tabular}
-}
-\label{forecasting_methods}
-\end{table}
-```
+\bigskip
 
 Based on the required time horizons we can further classify the problem into three broad solution domains - heuristic, statistical or econometric, and probabilistic models. Timeseries datasets have the unique property of dependence on what happened in the past. Therefore, we cannot randomly shuffle the order of the data without affecting the trends. With such dependency simple regression technique for forecasting can randomly show statistical significance even if there is no true correlation, and thus suitable for real-world usage. In the following sections, we will discuss the popular forecasting models used in the electricity demand forecasting domain.
 
 
 ## Forecasting Models
 
-Various techniques have been developed for electricity demand forecasting during the past few years. Electricity load forecasting models can be classified into parametric, semi-parametric, and non-parametric models based on the assumptions they make about the underlying data distribution and the flexibility in capturing relationships between variables. Parametric models rely on a fixed, predefined functional form with a finite number of parameters. As discussed in \cite{Fan2012}, statistical models are widely adopted for the load forecasting problem because of interpretability but less flexible when dealing with complex or non-linear patterns in the data.
+Various techniques have been developed for electricity demand forecasting during the past few years. Electricity load forecasting models can be classified into parametric, semi-parametric, and non-parametric models based on the assumptions they make about the underlying data distribution and the flexibility in capturing relationships between variables. Parametric models rely on a fixed, predefined functional form with a finite number of parameters. \cite{Fan2012} discussed statistical models are widely adopted for the load forecasting problem because of interpretability but are less flexible when dealing with complex or non-linear data.
 
-Semi-parametric models, such as Generalized Additive Models (GAMs), combine both parametric and non-parametric components. They allow for linear relationships between some variables while using smoothing functions to capture non-linear effects, offering a balance between interpretability and flexibility. A more recent and very popular GAM for regression technique is Prophet \cite{taylor2017facebook}. It is designed to optimally handle business forecasting tasks featuring time series captures at the hourly, daily, or weekly level with ideally at least a full year of historical data.
+Semi-parametric models, such as Generalized Additive Models (GAMs), combine both parametric and non-parametric components. They allow for linear relationships between some variables while using smoothing functions to capture non-linear effects, offering a balance between interpretability and flexibility. A more recent and very popular GAM for regression technique is Prophet which is designed to optimally handle business forecasting tasks featuring time series captures at the hourly, daily, or weekly level with ideally at least a full year of historical data \cite{taylor2017facebook}.
 
 Finally, Non-parametric models like Random Forests, SVR, k-Nearest Neighbors, and ANNs can capture complex, non-linear relationships but are computationally intensive and harder to interpret. Machine learning techniques, including ANNs, have shown success in load forecasting by modeling non-linear interactions between load and weather variables. 
 
 
 ```{=tex}
-\begin{table}[h]
-  \caption{Forecasting methods}\label{tab:forecasting_methods}
+\begin{table}[ht]
+  \caption{Forecasting methods}\label{forecasting_methods}
     \scalebox{0.9}{
     \centering
     \begin{tabular}{|c|p{5cm}|p{6cm}|} % 'p{5cm}' specifies the column width
         \hline
-        Forecasting methods & Advantages & Disadvantages\\ 
+        \textbf{Forecasting methods} & \textbf{Advantages} & \textbf{Disadvantages}\\ 
+        \hline
         \hline
         Statistical methods & 
         Uncomplicated and less computionally expensive. & 
@@ -191,13 +160,15 @@ Finally, Non-parametric models like Random Forests, SVR, k-Nearest Neighbors, an
 \end{table}
 ```
 
-Table \ref{forecasting_methods} shows the different forecasting methods and their advantages and disadvantages. As we can see, each method has its own strengths and weaknesses, and the choice of model depends on the specific requirements of the forecasting problem.
+Table \ref{forecasting_methods} shows the different forecasting methods and their advantages and disadvantages. Each method has its own strengths and weaknesses, and the choice of model depends on the specific requirements of the forecasting problem.
 
-## Challenges to Find the Ideal Electricity Load Forecasting Method
+\bigskip
 
-In this study we focus on short-term demand forecasting which is an essential instrument in power system planning, operations, and control. Many operating decisions are based on load forecasts such as dispatch scheduling of generating capacity, reliability analysis, and maintenance planning for the generators. Overestimation of electricity demand will cause a conservative operation which may lead to overproduction or excessive energy purchase. For instance, in \cite{AEMO} AEMO uses a monthly regression model based on five years (60 months) of historical data and the choice of five years data strikes a balance between ensuring that the model considers only relatively recent univariate consumption trends and behaviours while being long enough to capture seasonality and contain enough multivariate observations to be statistically meaningful. Univariate models, while simpler, often struggle to capture complex relationships and seasonal patterns in load data. Multivariate models, incorporating additional factors like temperature, humidity, and economic indicators, can improve accuracy but introduce challenges in data collection, preprocessing, and model complexity, thus require careful feature engineering. Univariate models use only historical demand data to make future predictions, while multivariate models consider other variables such as atmospheric variations and calendars along with historical demand data in the study of STLF \cite{asi6060100}, \cite{wang2016review} and \cite{chen2015electricity} both highlight the limitations of traditional methods and the growing interest in advanced hybrid techniques. Therefore, the selection of an ideal forecasting method depends on factors such as data availability, computational resources, and the desired level of accuracy, making it a complex and ongoing research area.
+## Challenges to Find the Ideal Forecasting Method
 
-\cite{taylor2009forecasting} developed both univariate and multivariate models and stated that the univariate models had good prediction capability. In univariate time series models, the historical electricity demand data are arranged with correlated past lags to capture the demand patterns even when the data are limited. \cite{mcculloch2001forecasting} obtains improved accuracy by including the temperature as a variable, recognising that weather conditions play a crucial role in forecasting performance. \cite{Fan2012} proposes a semi-parametric additive models to estimate the relationships between demand and the driver variables. Specifically, the inputs for these models are calendar variables, lagged actual demand observations and historical and forecast temperature traces for one or more sites in the target power system. The proposed methodology has been used to forecast the half-hourly electricity demand for up to seven days ahead for power systems in the Australian National Electricity Market (NEM). To achieve more efficient and accurate load forecasting \cite{Suo} establishes a multi-dimensional short-term load forecasting model based on XGBoost. The decision forest composed of many decision trees is the final learning model of XGBoost. It tries to correct the residual of all the previous weak learners by adding new weak learners. When these learners are combined for final prediction the accuracy will be higher than that of a single learner. The selection of appropriate hyper parameters of XGBoost is directly related to the performance of the model but there is no universal and scientific method to determine the hyper parameters. In order to reduce the randomness and blindness, based on the second search of multi-dimensional grids, a method of hyper parameters optimisation is proposed. Each hyper parameters combination is attempted in a grid traversal manner in turn. In short-term demand forecasting, faster computation is essential due to the need for real-time or near-real-time predictions. Models like XGBoost are preferred over LSTM because of their speed and ability to handle large dataset, faster training time and higher interpretability. However, limitations in computational power can impact the selection of models and their performance. This is especially critical when dealing with complex models or large-scale data, where ensuring optimal performance within available resources becomes a trade-off between prediction accuracy and computational feasibility. 
+In this research we focus on short-term demand forecasting which is an essential instrument in power system planning, operations, and control. Many operating decisions are based on load forecasts such as dispatch scheduling of generating capacity, reliability analysis, and maintenance planning for the generators. Overestimation of electricity demand will cause a conservative operation which may lead to overproduction or excessive energy purchase. For instance, in \cite{AEMO} AEMO uses a monthly regression model based on 5 years of historical data to capture. This period is chosen to balance capturing recent univariate consumption trends while being long enough to capture for seasonal patterns for reliable analysis. Univariate models, while simpler, often struggle to capture complex relationships and seasonal patterns in load data. Multivariate models, incorporating additional factors like temperature, humidity, and economic indicators, can improve accuracy but introduce challenges in data collection, preprocessing, and model complexity, thus require careful feature engineering. Univariate models use only historical demand data to make future predictions, while multivariate models consider other variables such as atmospheric variations and calendars along with historical demand data in the study of STLF \cite{wang2016review} and  \cite{chen2015electricity}, both highlight the limitations of traditional methods and the growing interest in advanced hybrid techniques. Therefore, the selection of an ideal forecasting method depends on factors such as data availability, computational resources, and the desired level of accuracy, making it a complex and ongoing research area.
+
+\cite{taylor2009forecasting} developed both univariate and multivariate models and stated that the univariate models had good prediction capability. In univariate time series models, the historical electricity demand data are arranged with correlated past lags to capture the demand patterns even when the data are limited. \cite{mcculloch2001forecasting} obtains improved accuracy by including the temperature as a variable, recognising that weather conditions play a crucial role in forecasting performance. \cite{Fan2012} proposes a semi-parametric additive models to estimate the relationships between demand and the driver variables. Specifically, the inputs for these models are calendar variables, lagged actual demand observations and historical and forecast temperature traces for one or more sites in the target power system. The proposed methodology has been used to forecast the half-hourly electricity demand for up to seven days ahead for power systems in the Australian National Electricity Market (NEM). To achieve more efficient and accurate load forecasting \cite{Suo} establishes a multi-dimensional short-term load forecasting model based on XGBoost. The decision forest composed of many decision trees is the final learning model of XGBoost. It tries to correct the residual of all the previous weak learners by adding new weak learners. When these learners are combined for final prediction the accuracy will be higher than that of a single learner. The selection of appropriate hyper-parameters of XGBoost is directly related to the performance of the model but there is no universal and scientific method to determine the hyper-parameters. In order to reduce the randomness and blindness, based on the second search of multi-dimensional grids, a method of hyper-parameter optimisation is proposed. Each hyper-parameters combination is attempted in a grid traversal manner in turn. In short-term demand forecasting, faster computation is essential due to the need for real-time or near-real-time predictions. Models like XGBoost are preferred over LSTM because of their speed and ability to handle large dataset, faster training time and higher interpretability. However, limitations in computational power can impact the selection of models and their performance. This is especially critical when dealing with complex models or large-scale data, where ensuring optimal performance within available resources becomes a trade-off between prediction accuracy and computational feasibility. 
 
 ## Performance Metrics and Model Evaluations
 
@@ -221,8 +192,7 @@ Mean Percentage Error (MAE) & $\frac{1}{n}\sum_{i=1}^{n}\frac{(y_i-\hat{y_i})}{y
 \end{table}
 ```
 
-To report performance the most basic method, *hold-out* validation and split the  data to 80/20 split for training and testing or 60/20/20 for training/validation/testing. The other approach to evaluate the performance of the model using cross-validation. As discussed in \cite{rafferty2023forecasting}, the traditional k-fold cross-validation technique is not suitable for time series data because it shuffles the data randomly and does not take into account the temporal structure of the data. Instead, time series cross-validation methods like forward chaining or rolling-origin cross validation which is similar to k-fold cross-validation but maintains the temporal order of the data. In this research study we will explore the hold-out validation, k-fold and forward chaining cross-validation technique to evaluate the performance of the models.
-
+To report performance, the most basic method is to perform *hold-out* validation and to do that we split the  data to 80/20 split for training and testing or 60/20/20 for training/validation/testing. The other approach to evaluate the performance of the model using cross-validation. As discussed in \cite{rafferty2023forecasting}, the traditional k-fold cross-validation technique is not suitable for time series data because it shuffles the data randomly and does not take into account the temporal structure of the data. Instead, time series cross-validation methods like forward chaining or rolling-origin cross validation which is similar to k-fold cross-validation but maintains the temporal order of the data. In this research study we will explore the hold-out validation, k-fold and forward chaining cross-validation technique to evaluate the performance of the models. We will determine the MAE, RMSE and MAPE to evaluate the performance of the models on the test data.
 
 
 # Material and Methods
@@ -677,19 +647,19 @@ The plot does not indicate any significant deviations in the demand. One could c
 
 ### Why XGBoost
 
-XGBoost can be adjusted from standard regression to time series regression by applying data transformations to add lag features as predictors for the model. XGBoost is suitable for time series modelling because of its feature engineering flexibility, high accuracy, and ability to handle non-linear relationships (Brownlee, 2016). XGBoost’s tree-based model structure can handle different features like categorical and continuous variables without normalisation or scaling like other models (Ambika, 2023). This saves preprocessing time and creates a robust model for unscaled features. 
+XGBoost can be adjusted from standard regression to time series regression by applying data transformations to add lag features as predictors for the model. XGBoost is suitable for time series modelling because of its feature engineering flexibility, high accuracy, and ability to handle non-linear relationships \cite{brownlee_gradientboosting2020}. XGBoost’s tree-based model structure can handle different features like categorical and continuous variables without normalisation or scaling like other models \cite{ambika_2023_xgboost}. This saves preprocessing time and creates a robust model for unscaled features. 
 
-Secondly, XGBoost can capture complex non-linear relationships because it is a decision tree-based model, and decision trees are inherently not linear (Ambika, 2023). This allows us to use as many features as we want without worrying about feature interactions in models like linear regression or manual feature transformations like log or polynomial transformations. 
+Secondly, XGBoost can capture complex non-linear relationships because it is a decision tree-based model, and decision trees are inherently not linear \cite{ambika_2023_xgboost}. This allows us to use as many features as we want without worrying about feature interactions in models like linear regression or manual feature transformations like log or polynomial transformations. 
 
-Thirdly, XGBoost is highly accurate because of advanced algorithms and model-building options that make it highly effective for many machine-learning tasks (Ambika, 2023). Combining boosting, residual learning, L1 and L2 regularisation, and pruning leads to high model accuracy. After the model is run, XGBoost shows feature importance and allows for further hyper-parameter tuning to improve accuracy and computational efficiency.
+Thirdly, XGBoost is highly accurate because of advanced algorithms and model-building options that make it highly effective for many machine-learning tasks \cite{ambika_2023_xgboost}. Combining boosting, residual learning, L1 and L2 regularisation, and pruning leads to high model accuracy. After the model is run, XGBoost shows feature importance and allows for further hyper-parameter tuning to improve accuracy and computational efficiency.
 
 ### How XGBoost works
 
-XGBoost is built upon gradient boosting, combining three elements: a loss function that must be optimised, a weak learner to make predictions, and an additive model to add weak learners to minimise the loss function. Since we are tackling a time-series regression task, the loss function is the mean Squared Error (Brownlee, 2016). 
+XGBoost is built upon gradient boosting, combining three elements: a loss function that must be optimised, a weak learner to make predictions, and an additive model to add weak learners to minimise the loss function. Since we are tackling a time-series regression task, the loss function is the mean Squared Error \cite{brownlee_gradientboosting2020}. 
 
-The weak learner in XGBoost is a decision tree, but not a complex decision tree like random forests. XGBoost uses shallow trees with limited depth as weak learners. The trees are weak predictors but can be used to create an accurate model combined. An XGBoost decision tree is different from the typical decision tree. XGBoost uses the gradient and Hessian (a second-order measure of the curvature of the loss function) to improve the model, which is a further improvement over improving the model using gradient only (Chen and Guestrin, 2016).
+The weak learner in XGBoost is a decision tree, but not a complex decision tree like random forests. XGBoost uses shallow trees with limited depth as weak learners. The trees are weak predictors but can be used to create an accurate model combined. An XGBoost decision tree is different from the typical decision tree. XGBoost uses the gradient and Hessian (a second-order measure of the curvature of the loss function) to improve the model, which is a further improvement over improving the model using gradient only \cite{chen_2016_xgboost}.
 
-The goal is to predict the total demand from the given features. First, each row's total demand average and residuals are calculated. Next, a similar score is calculated using the formula below. Lambda is a regularisation parameter that prevents overfitting by penalising overly complex trees and encouraging them to split only when significant improvement occurs (Chen and Guestrin, 2016).
+The goal is to predict the total demand from the given features. First, each row's total demand average and residuals are calculated. Next, a similar score is calculated using the formula below. Lambda is a regularisation parameter that prevents overfitting by penalising overly complex trees and encouraging them to split only when significant improvement occurs \cite{chen_2016_xgboost}.
 
 $$
 \text{Similarity Score} = \frac{\sum{(residuals)}^2 }{\text{number of residuals} + \lambda}
@@ -702,19 +672,10 @@ The Gain Score will be used to determine whether a split is good.
 $$
 Gain = {Similarity}_{left} + {Similarity}_{right} - {Similarity}_{root}
 $$
-For example, assume a root node that splits the total demand into a temperature less than twenty-five degrees Celsius; the child nodes are the residuals.
 
-```{=tex}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.55\textwidth, height=5cm]{C1.jpeg}
-\caption{Sample Tree}\label{C1}
-\end{figure}
-```
+The similarity score for the root and leaf nodes can be calculated, and the Gain formula can be applied.  We can test different thresholds by comparing Gain from different thresholds. The higher the gain score, the better the threshold for splitting residuals into clusters of similar values. Once the best threshold for splitting is determined, the same process is applied to the leaves; to prevent overfitting, a max tree depth can be set in the model parameters. Max tree depth and lambda can both help reduce overfitting. The above process is run until the max tree depth or no more residuals are split \cite{a2016_how}.
 
-The similarity score for the root and leaf nodes can be calculated, and the Gain formula can be applied.  We can test different thresholds by comparing Gain from different thresholds. The higher the gain score, the better the threshold for splitting residuals into clusters of similar values. Once the best threshold for splitting is determined, the same process is applied to the leaves; to prevent overfitting, a max tree depth can be set in the model parameters. Max tree depth and lambda can both help reduce overfitting. The above process is run until the max tree depth or no more residuals are split (Arcgis.com, 2016).
-
-The next step is to prune the trees we made. A value Gamma is chosen, and we subtract the gain of each branch by Gamma. If the result is negative, that branch doesn’t provide enough improvement, so the branch is pruned. The lambda decreases the similarity score, hence decreasing the Gain value. A smaller Gain value means it is easier to prune branches and even whole trees (Arcgis.com, 2016).
+The next step is to prune the trees we made. A value Gamma is chosen, and we subtract the gain of each branch by Gamma. If the result is negative, that branch doesn’t provide enough improvement, so the branch is pruned. The lambda decreases the similarity score, hence decreasing the Gain value. A smaller Gain value means it is easier to prune branches and even whole trees \cite{a2016_how}.
 
 ### Predicting Values
 
@@ -734,9 +695,9 @@ Electricity demand patterns change over time due to technological shifts, econom
 
 ### Train Test Split
  
-The train-test split is done differently in a time series regression model. Firstly, the chosen dataset is ordered chronologically to preserve the temporal order of the data. Eighty percent of the chronologically ordered data is used for training, and the remainder for testing (Brownlee, 2020).
+The train-test split is done differently in a time series regression model. Firstly, the chosen dataset is ordered chronologically to preserve the temporal order of the data. Eighty percent of the chronologically ordered data is used for training, and the remainder for testing \cite{brownlee_2020_how}.
 
-The Fig \ref{traintest} illustrates a time series train-test split. The green colour shows the data used for training, while the blue is the testing data. The stripped black line represents the transition from training to testing.
+The Fig \ref{traintest} illustrates a time series train-test split. The blue colour shows the data used for training, while the orange is the testing data. The stripped line represents the transition from training to testing.
 
 ```{=tex}
 \begin{figure}[H]
@@ -750,18 +711,18 @@ The Fig \ref{traintest} illustrates a time series train-test split. The green co
 
 Hyperparameter tuning is critical to improving model accuracy. The two methods considered for tuning are Grid Search and Random Search. Grid Search is an exhaustive search testing all possible combinations for hyperparameter values. Random Search randomly samples a fixed number of hyperparameter combinations. The trade-off is finding the best combination of hyperparameters vs. computational efficiency. Random Search is chosen due to computational constraints.
 
-The first hyperparameter is the number of trees (n_estimators) the model can build. A more significant number of trees allows the model to capture more complex patterns but increases the risk of overfitting and longer training time. The tuning range for the number of trees is [100,200,300,500], allowing for a gradual increase in trees for balanced exploration of a simple model with a few trees and complex models with many trees. Tree addition has diminishing returns; after a certain number of trees, only computational cost will increase, but model performance will plateau (Readthedocs.io, 2022).
+The first hyperparameter is the number of trees (n_estimators) the model can build. A more significant number of trees allows the model to capture more complex patterns but increases the risk of overfitting and longer training time. The tuning range for the number of trees is [100,200,300,500], allowing for a gradual increase in trees for balanced exploration of a simple model with a few trees and complex models with many trees. Tree addition has diminishing returns; after a certain number of trees, only computational cost will increase, but model performance will plateau \cite{a2022_xgboost}.
 
-The learning rate determines how much each tree contributes to the final prediction. A lower learning rate means the model learns slower and has a higher training time. While a significant learning rate means the model will learn fast using less computational power, it is more prone to overfitting. The small learning rate (0.01) allows the model to capture underlying patterns, but convergence is slow. The low learning rate(0.05) uses fewer trees but is still enough to prevent overfitting. This value balances run time and model accuracy (Readthedocs.io, 2022). 
+The learning rate determines how much each tree contributes to the final prediction. A lower learning rate means the model learns slower and has a higher training time. While a significant learning rate means the model will learn fast using less computational power, it is more prone to overfitting. The small learning rate (0.01) allows the model to capture underlying patterns, but convergence is slow. The low learning rate(0.05) uses fewer trees but is still enough to prevent overfitting. This value balances run time and model accuracy \cite{a2022_xgboost}. 
 
-The standard learning rate (0.1) is usually used as a benchmark to compare lower or higher learning rates. The high learning rate (0.3) helps reduce training time, but with a high convergence speed, the model will have a high variance. The high learning rates are explored to determine whether faster learning provides better results or leads to overfitting. The max depth hyperparameter controls the depth of each tree. Deeper trees are better at capturing more complex patterns but have a higher risk of overfitting. The tree depth has the same rationale as the learning rate with shallow trees (3), medium depth (5), increased depth (7), and deep trees (10). The trade-offs are the same between bias, variance, overfitting, and computational efficiency (Readthedocs.io, 2022).
+The standard learning rate (0.1) is usually used as a benchmark to compare lower or higher learning rates. The high learning rate (0.3) helps reduce training time, but with a high convergence speed, the model will have a high variance. The high learning rates are explored to determine whether faster learning provides better results or leads to overfitting. The max depth hyperparameter controls the depth of each tree. Deeper trees are better at capturing more complex patterns but have a higher risk of overfitting. The tree depth has the same rationale as the learning rate with shallow trees (3), medium depth (5), increased depth (7), and deep trees (10). The trade-offs are the same between bias, variance, overfitting, and computational efficiency \cite{a2022_xgboost}.
 
-The gamma parameter (Lambda) in XGBoost is a regularisation parameter that prevents the model from overfitting. No regularisation (0) means no tree-splitting restrictions, capturing detailed patterns. No regularisation serves as a base for comparing regularisation levels. Medium regularisation (0.1) allows only significant splits, which leads to better generalisation and a balance between complexity and pruning. High regularisation (0.3) focuses on essential splits and improves model simplicity (Readthedocs.io, 2022).
+The gamma parameter (Lambda) in XGBoost is a regularisation parameter that prevents the model from overfitting. No regularisation (0) means no tree-splitting restrictions, capturing detailed patterns. No regularisation serves as a base for comparing regularisation levels. Medium regularisation (0.1) allows only significant splits, which leads to better generalisation and a balance between complexity and pruning. High regularisation (0.3) focuses on essential splits and improves model simplicity \cite{a2022_xgboost}.
 
 The random search uses 50 iterations for computational efficiency. Each iteration takes a combination of random values from each hyperparameter list and tests the performance. The lowest mean squared error determines the best model. Sci-kit, by default, tries to maximise scores, so setting a negative mean squared error addresses that issue. 
 
 
-Cross-validation is done differently in time series. The TimeSeriesSplit ensures that the training happens on past data and tests on future data based on past information to preserve the temporal aspect of the time series (sci-kit-learn, 2024). The best results after a random search are:
+Cross-validation is done differently in time series. The `TimeSeriesSplit` ensures that the training happens on past data and tests on future data based on past information to preserve the temporal aspect of the time series \cite{scikit-learn2024}. The best results after a random search are:
 
 ```python
 Best Parameters: {'n_estimators': 300, 
@@ -775,7 +736,7 @@ Best Parameters: {'n_estimators': 300,
 
 The F score represents the number of times a feature is used to split data. The higher the f-score, the more critical a feature is to the model. The most essential features are Temperature, lag, and hour. The model is not too reliant on one feature, as the top three features have very close F scores. Temperature is expected to have a significant impact, as observed in the literature. Lag 1, the previous demand for the last 30 minutes, is expected to contribute significantly to a time series regression model. Three lag features provided the maximum model improvement.
 
-The hour is transformed using the cosine function to address the issue of hour proximity (avanwyk, 2022). For example, if we have hour “23,” hour “00,” and hour “05,” the model might assume that hour “05” is closer to hour “00,” but that is false. The cosine transformation will address this issue, giving peak hours more significance.
+The hour is transformed using the cosine function to address the issue of hour proximity \cite{avanwyk_2022_encoding}. For example, if we have hour “23,” hour “00,” and hour “05,” the model might assume that hour “05” is closer to hour “00,” but that is false. The cosine transformation will address this issue, giving peak hours more significance.
 
 The hour has a significant impact and captures the effect of intraday demand. The seasons are one-hot encoded, so the interpretation differs from numerical values. The most important features are the closest to the time interval forecasted.
 
@@ -789,7 +750,7 @@ The hour has a significant impact and captures the effect of intraday demand. Th
 
 #### Actual & Predicted Values
 
-The Fig \ref{actualpredict} shows an upward-sloping diagonal line, which indicates that the model did an excellent job predicting the target variable.
+The Figure \ref{actualpredict} shows an upward-sloping diagonal line, which indicates that the model did an excellent job predicting the target variable.
 
 ```{=tex}
 \begin{figure}[H]
@@ -831,11 +792,8 @@ XGBoost and Facebook Prophet had lower errors compared to the AEMO forecast mode
 
 ## Facebook Prophet
 
-### Why Prophet and How it works
-Prophet was developed internally at Facebook (now known as Meta) by Sean J. Taylor and Ben Letham  to optimally handle business forecasting tasks, which typically features multiple seasonality, missing data, and outliers \cite{taylor2017facebook}. Prophet is a decomposable time series model with three main components: trend, seasonality, and holidays. The trend component models non-periodic changes in the value of the time series. The seasonality component models periodic changes in the value of the time series. The holiday component models the effects of holidays that occur on potentially irregular schedules over one or more days. The model is fitted to historical data, and future data is forecasted using the model. The model is highly customisable, allowing users to adjust the model to fit their data and business needs.
-
-
-Taylor and Letham \cite{taylor2017facebook} proposed a modular regression model with interpretable parameters that can be intuitively adjusted by analysts with domain knowledge about the time series. The automatic ARIMA forecasts are prone to large trend errors when there is a change in trend near the cutoff period and they fail to capture any seasonality. The exponential smoothing and seasonal naive forecasts capture weekly seasonality but miss longer-term seasonality. All of the methods overreact to the end-of-year dip because they do not adequately model yearly seasonality. In the proposed model as named Prophet, they use a decomposable time series model with three main model components: trend, seasonality, and holidays. They are combined in the following equation:
+### Model Specifications
+Prophet was developed internally at Facebook (now known as Meta) to optimally handle business forecasting tasks, which typically features multiple seasonality, missing data, and outliers \cite{taylor2017facebook}. Prophet is a decomposable time series model with three main components: trend, seasonality, and holidays. The trend component models non-periodic changes in the value of the time series. The seasonality component models periodic changes in the value of the time series. The holiday component models the effects of holidays that occur on potentially irregular schedules over one or more days. The model is fitted to historical data, and future data is forecasted using the model. The model is highly customisable, allowing users to adjust the model to fit their data and business needs. This model is a regression model with interpretable parameters that can be intuitively adjusted by analysts with domain knowledge about the time series. In the proposed Prophet model, they use a decomposable time series model with three main model components: trend, seasonality, and holidays. They are combined in the following equation:
 
 $$
 y(t) = g(t) + s(t) + h(t) + \epsilon_t
@@ -843,7 +801,7 @@ $$
 
 Here $g(t)$ is the trend function which models non-periodic changes in the value of the time series, $s(t)$ represents periodic changes (e.g., weekly and yearly seasonality), and $h(t)$ represents the effects of holidays which occur on potentially irregular schedules over one or more days. The error term represents any idiosyncratic changes which are not accommodated by the model; they make the parametric assumption that $t$ is normally distributed.
 
-This specification is similar to a generalized additive model (GAM) (Hastie and Tibshirani 1987), a class of regression models with potentially non-linear smoothers applied to the regressors. Here we use only time as a regressor but possibly several linear and non-linear functions of time as components. Modelling seasonality as an additive component is the same approach taken by exponential smoothing (Gardner 1985). Multiplicative seasonality, where the seasonal effect is a factor that multiplies $g(t)$, can be accomplished through a log transform. 
+This specification is similar to a generalized additive model (GAM), a class of regression models with potentially non-linear smoothers applied to the regressors. Here we use only time as a regressor but possibly several linear and non-linear functions of time as components. Modelling seasonality as an additive component is the same approach taken by exponential smoothing. Multiplicative seasonality, where the seasonal effect is a factor that multiplies $g(t)$, can be accomplished through a log transform. 
 
 The growth is typically modeled as a logistic growth curve, which is a common pattern in many business time series. The logistic growth model has an inflection point that can be used to model changes in growth rates. The logistic growth curve is defined as:
 
@@ -859,14 +817,14 @@ $$
 
 Where as mentioned earlier, $k$ is the growth rate, $\delta$ is the rate adjustments, and $m$ is the offset parameter. $\gamma_j$ is set to $-s_j\delta_j$ to make the function continuous. 
 
-Business time series often have multi-period seasonality as a result of the human behaviours they represent. For instance, a 5-day work week can produce effects on a time series that repeat each week, while vacation schedules and school breaks can produce effects that repeat each year. To fit and forecast these effects we must specify seasonality models that are periodic functions of $t$. In the model, they rely on Fourier series to provide a flexible model of periodic effects (Harvey and Shephard 1993). The model rely on Fourier series to provide a flexible model of periodic effects (Harvey & Shephard 1993). Let P be the regular period we expect the time series to have (e.g. P =365.25 for yearly data or P = 7 for weekly data, when we scale our time variable in days). We can approximate arbitrary smooth seasonal effects with:
+Business time series often have multi-period seasonality as a result of the human behaviours they represent. For instance, a 5-day work week can produce effects on a time series that repeat each week, while vacation schedules and school breaks can produce effects that repeat each year. To fit and forecast these effects we must specify seasonality models that are periodic functions of $t$. In the model, they rely on Fourier series to provide a flexible model of periodic effects. Let P be the regular period we expect the time series to have (e.g. P = 365.25 for yearly data or P = 7 for weekly data, when we scale our time variable in days). We can approximate arbitrary smooth seasonal effects with:
 $$
 s(t) = \sum_{n=1}^{N} (a_n \cos(\frac{2\pi nt}{P}) + b_n \sin(\frac{2\pi nt}{P}))
 $$
 
-Holidays and events provide large, somewhat predictable shocks to many business time series and often do not follow a periodic pattern, so their effects are not well modeled by a smooth cycle. As with seasonality, we use a prior $\kappa \sim {N(0,\nu)}$.
+Seasonalities are estimated using a partial Fourier sum. The number of terms in the partial sum (the order) is a parameter that determines how quickly the seasonality can change. The default Fourier order for yearly seasonality is 10, which produces this fit. The default values are often appropriate, but they can be increased when the seasonality needs to fit higher-frequency changes, and generally be less smooth. The Fourier order can be specified for each built-in seasonality when instantiating the model. Increasing the number of Fourier terms allows the seasonality to fit faster changing cycles, but can also lead to overfitting.
 
-Seasonalities are estimated using a partial Fourier sum. In the paper (Taylor, S.J. and Letham, B. (2017) it is mentioned that how a partial Fourier sum can approximate an arbitrary periodic signal. The number of terms in the partial sum (the order) is a parameter that determines how quickly the seasonality can change. The default Fourier order for yearly seasonality is 10, which produces this fit. The default values are often appropriate, but they can be increased when the seasonality needs to fit higher-frequency changes, and generally be less smooth. The Fourier order can be specified for each built-in seasonality when instantiating the model, here it is increased to 20. Increasing the number of Fourier terms allows the seasonality to fit faster changing cycles, but can also lead to overfitting: N Fourier terms corresponds to 2N variables used for modeling the cycle.
+Holidays and events provide large, somewhat predictable shocks to many business time series and often do not follow a periodic pattern, so their effects are not well modeled by a smooth cycle. As with seasonality, we use a prior $\kappa \sim {N(0,\nu)}$.
 
 Prophet will by default fit weekly and yearly seasonalities, if the time series is more than two cycles long. It will also fit daily seasonality for a sub-daily time series. We can add other seasonalities (monthly, quarterly, hourly) using the `add_seasonality` method.
 
@@ -874,12 +832,6 @@ In this section, we will discuss the implementation of the Facebook Prophet mode
 
 
 ### Data pre-processing
-Prophet is on PyPI, so we can use `pip` to install it.
-
-``` python
-python -m pip install prophet
-```
-
 Prophet follows the sklearn model API structure, where we first create an instance of the `Prophet` class and then use its `fit` and `predict` methods.
 
 The input for Prophet must always be a DataFrame containing two specific columns: `ds` and `y`. The `ds` column (representing the date) should be in a format recognized by Pandas, such as `YYYY-MM-DD` for a date or `YYYY-MM-DD HH:MM:SS` for a timestamp. So we have changed our `DATETIME` column to `ds`. The `y` column should be containing numeric values representing the variable we want to forecast, thus we change the `DEMAND` column to `y` column.
@@ -887,7 +839,7 @@ The input for Prophet must always be a DataFrame containing two specific columns
 ### Hyper-parameter tuning
 
 For the model prophet it is recommended to tune the parameters like - \linebreak `changepoint_prior_scale`, `seasonality_prior_scale`, `holidays_prior_scale`, and `seasonality_mode`. 
-We have considered the follwong parameters for tuning:
+We have considered the following parameters for tuning:
 
 -   `seasonality_prior_scale` parameter controls the flexibility of the seasonality. Similarly, a large value allows the seasonality to fit large fluctuations, a small value shrinks the magnitude of the seasonality. The default is 10., which applies basically no regularization. 
 
@@ -896,7 +848,7 @@ We have considered the follwong parameters for tuning:
 -   `seasonality_mode` parameter options are [`'additive'`, `'multiplicative'`]. Default is `'additive'`. This is best identified just from looking at the time series of our data and we observe that the seasonal fluctuations are roughly constant in size over time, so we consider using additive seasonality.
 
 
-Prophet does not have a grid search method so we have used `sklearn` the `ParameterGrid` method from the `sklearn` library to tune the hyper-parameters. We have specified the grid parameters and run the grid search. We have used. We have used the `mean_squared_error` as the scoring parameter for the grid search. The best parameters are selected based on the lowest mean squared error.
+Prophet does not have a built in grid search method so we have used `sklearn` the `ParameterGrid` method from the `sklearn` library to tune the hyper-parameters. We have specified the grid parameters and run the grid search. We have used. We have used the `mean_squared_error` as the scoring parameter for the grid search. The best parameters are selected based on the lowest mean squared error.
 
 
 ```python
@@ -938,11 +890,9 @@ We these parameters in the model as additional regressors :
 
 ### Cross-Validation
 
-The traditional method to tune model's performance is the **hold-out** validation that splits the whole dataset in to training validation and test set. We have applied 80-20 split for training and testing. The model is trained on the train set and performance is evaluated on test set.
+The traditional method to tune model's performance is the **hold-out** validation that splits the whole dataset in to training validation and test set. We have applied 80/20 split for training and testing. The model is trained on the train set and performance is evaluated on test set.
 
-As mention in [ref:book] forward-chaining cross-validation, also called rolling-origin cross-validation, is similar to k-fold cross-validation but is better suited to sequential data such as time series. There is no random shuffling of data to begin with, but a test set may be set aside. The training set is split into k parts, and the model is trained on the first part and tested on the second part. The model is then trained on the first two parts and tested on the third part, and so on. This process is repeated k times, and the performance is averaged over the k folds. The main advantage of forward-chaining cross-validation is that it is more realistic for time series data, as it simulates the real-world scenario of training on past data and testing on future data.
-
-We have performed 5-fold cross validation for a range of historical cutoffs using the `cross_validation` function. We have used `cutoffs` keyword `cross_validation function` and specify the custom cutoffs.
+As mentioned in the literature review that we consider forward-chaining cross validation, we perform 5-fold cross validation for a range of historical cutoffs using the `cross_validation` function. We have used `cutoffs` keyword `cross_validation function` and specify the custom cutoffs.
 
 In the Fig \ref{cross_validation_output} we have shown the terminology used in the cross-validation method. 
 - `initial` is the first training period. In Fig \ref{cross_validation_output}, it would be the first two blocks of data in the first fold. It is the minimum amount of data needed to begin the training and we need to at least have 365.6 days of data. Considering our dataset we have used 14 months as `initial` parameter. 
@@ -965,9 +915,9 @@ the first fold to capture the yearly seasonality.
 Below is the result of the Prophet model:
 
 ``` python
-Root Mean Squared Error: 111.56630725237135
-Mean Absolute Error: 87.67370852515597
-Mean Absolute Percentage Error: 0.011785205999250543
+Root Mean Squared Error: 111.5663
+Mean Absolute Error: 87.6737
+Mean Absolute Percentage Error: 0.0118
 ```
 The model has performed well in forecasting the electricity demand for the test data. The MAPE is 0.0118 which is 1.18% and indicates that the model is performing well.
 
@@ -1042,13 +992,15 @@ The Fig \ref{AEMO_Prophet_XGBoost} shows the comparison of the forecasted demand
 
 # Conclusion and Future Work {.label:ccl}
 
-We built, tested, and compared two popular machine-learning models: XGBoost and Facebook Prophet. XGBoost is highly flexible and known for its high accuracy in many domains, while Facebook Prophet is a time-series-specific model that excels in capturing trends. The goal is to see how these different models forecast short-term electricity demand. 
+We built, tested, and compared popular machine-learning models -- XGBoost and with an additive model --  Prophet. XGBoost is highly flexible and known for its high accuracy in many domains, while Facebook Prophet is a time-series-specific model that excels in capturing trends. The goal is to see how these different models forecast short-term electricity demand. 
  
 We found that both models performed well with very close results. Facebook Prophet is easier to use and more efficient when forecasting electricity demand. It offers a more user-friendly approach because it’s built to handle time series data with clear seasonal patterns. However, XGBoost can deliver competitive results at the cost of substantial feature engineering.
 
 We also compared the two models with the AEMO forecast to benchmark our performance against industry standards, and our models performed better. However, we do not suggest that our models are superior to AEMO. There are many valid time horizons for electricity demand forecasting where the current AEMO model will outperform the models we build. We trained our model on a specific dataset, while the AEMO model is trained on more extensive and complex data. The AEMO model is also built to handle various scenarios. However, our model is built for one specific scenario.
 
-The results highlight how tailoring a model to a specific forecasting problem can improve accuracy. By creating particular models, we can better address electricity demand's short-term, high-frequency nature. This report emphasises the importance of customisation in forecasting models. Comparing multi-use multi-timeframe models and single-use case models is work that needs to be done in the future, along with incorporating the impact of photovoltaic systems and population and economic growth.
+The results highlight how tailoring a model to a specific forecasting problem can improve accuracy. By creating particular models, we can better address electricity demand's short-term, high-frequency nature. This report emphasises the importance of customisation in forecasting models. Comparing multi-use multi-timeframe models and single-use case models is work that needs to be done in the future, along with incorporating the impact of photovoltaic systems and population and economic growth. 
+
+For future work, we recommend expanding the dataset to include more features like weather data, economic indicators, and population growth. This will help the model capture more complex patterns and improve forecasting accuracy. We also want to recommend the cost-benefit analysis of implementing the models in real-world scenarios. This will help stakeholders to choose the best model for their specific needs. We will also explore popular deep learning models like LSTM and other pre-trained models like DeepAR for short-term electricity laod forecasting.
 
 
 # References {.unnumbered}
@@ -1058,6 +1010,17 @@ The results highlight how tailoring a model to a specific forecasting problem ca
 \bibliography{references}
 ```
 # Appendix {.unnumbered}
+
+## **Figures** {.unnumbered}
+
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth,height=7cm]{renewable_fuel_sources_chart.png}
+\caption{Renewable fuel sources [Source:
+Derived from Department of the Environment and Energy, Australian Energy Statistics, Table O, June 2021]}\label{renewable}
+\end{figure}
+```
 
 ## **Codes** {.unnumbered}
 
@@ -1074,3 +1037,4 @@ Use <https://www.tablesgenerator.com/markdown_tables> to create very simple mark
 | col 1 is | left-aligned  | \$1200 |
 | col 2 is |   centered    |   \$12 |
 | col 3 is | right-aligned |    \$1 |
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

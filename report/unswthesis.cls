@@ -62,14 +62,14 @@
 %-----------------------------------------------------------------------
 
 \newcommand{\setpagesize}{%
-    \setlength{\oddsidemargin}  {1.5cm}
-    \setlength{\evensidemargin} {-0.5cm}    % was 0cm
-    \setlength{\marginparwidth} {40\p@}
-    \setlength{\marginparsep}   {10\p@}     % was 0pt
-    \setlength{\topmargin}      {-0.6cm}    % was 0cm
+    \setlength{\oddsidemargin}  {0.5cm}    % was 1.5 was 0.5cm
+    \setlength{\evensidemargin} {0cm}     % was 0cm -0.5cm
+    \setlength{\marginparwidth} {40\p@}    %was 40
+    \setlength{\marginparsep}   {10\p@}     % was 0pt 
+    \setlength{\topmargin}      {-0.3cm}     % was 0cm 6cm
     \setlength{\headheight}     {15\p@}     % was 12pt
     \setlength{\headsep}        {0.5cm}
-    \setlength{\textwidth}      {14.9cm}    % was 15cm
+    \setlength{\textwidth}      {15cm}    % was 15cm was 14.9
     \setlength\@tempdima{\paperheight}
     \addtolength\@tempdima{-35mm}  % top margin
     \addtolength\@tempdima{-25mm}  % bottom margin
@@ -877,6 +877,4 @@ rules used for the chapter headings is controlled by
 `\texttt{\bs{}chaprule}' and can be set to another value, say 0~pt, by
 the command `\texttt{\bs{}setlength\{\bs{}chaprule\}\{0pt\}}' in the
 preamble. There is a maximum value of 6~pt for
-`\texttt{\bs{}chaprule}'.
-
-\end{document}
+`\texttt{\bs{}chap
