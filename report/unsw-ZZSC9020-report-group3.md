@@ -105,7 +105,7 @@ Finally, Non-parametric models like Random Forests, SVR, k-Nearest Neighbors, an
 ```{=tex}
 \begin{table}[ht]
   \caption{Forecasting methods}\label{forecasting_methods}
-    \scalebox{0.9}{
+    \scalebox{0.8}{
     \centering
     \begin{tabular}{|c|p{5cm}|p{6cm}|} % 'p{5cm}' specifies the column width
         \hline
@@ -984,7 +984,7 @@ We also compared the two models with the AEMO forecast to benchmark our performa
 
 The results highlight how tailoring a model to a specific forecasting problem can improve accuracy. By creating particular models, we can better address electricity demand's short-term, high-frequency nature. This report emphasises the importance of customisation in forecasting models. Comparing multi-use multi-timeframe models and single-use case models is work that needs to be done in the future, along with incorporating the impact of photovoltaic systems and population and economic growth. 
 
-For future work, we recommend expanding the dataset to include more features like weather data, economic indicators, and population growth. This will help the model capture more complex patterns and improve forecasting accuracy. We also want to recommend the cost-benefit analysis of implementing the models in real-world scenarios. This will help stakeholders to choose the best model for their specific needs. We will also explore popular deep learning models like LSTM and other pre-trained models like DeepAR for short-term electricity laod forecasting.
+For future work, we recommend expanding the dataset to include more features like weather data, economic indicators, and population growth. This will help the model capture more complex patterns and improve forecasting accuracy. We also want to recommend the cost-benefit analysis of implementing the models in real-world scenarios. This will help stakeholders to choose the best model for their specific needs. We will also explore popular deep learning models like LSTM and other pre-trained models like DeepAR for short-term electricity load forecasting.
 
 
 # References {.unnumbered}
