@@ -494,7 +494,7 @@ We tend to use heating during winter months and cooling during summer. The heatm
 
 ## Day of the week Demand
 
-Next we analyse whether the electricity demand fluctuate depending on the day of the week. As per the heatmap, weekends tend to have lower demand. This could be due to the fact that most offices, factories are closed during the weekend. Also, many people tend to spend weekends outside. Similar to month, day of the week seems to have an influence on the demand. Hence suitable to be included in the model build.
+Next we analyse whether the electricity demand fluctuate depending on the day of the week. As per the heatmap in Figure \ref{day_heat}, weekends tend to have lower demand. This could be due to the fact that most offices, factories are closed during the weekend. Also, many people tend to spend weekends outside. Similar to month, day of the week seems to have an influence on the demand. Hence suitable to be included in the model build.
 
 ```{=tex}
 \begin{figure}[H]
@@ -507,8 +507,9 @@ Next we analyse whether the electricity demand fluctuate depending on the day of
 
 ## Demand on Holidays
 
-Extending on the day of the week demand, we would like to analyse the difference in average demand between holidays and non-holidays.
-For the purpose of the analysis, we consider Public holidays and weekends as \textit{Holidays} and all the other days as non-holidays.
+Extending on the day of the week demand, we would like to analyse the difference in average demand between Business days and non-business days. Public Holidays and weekends are considered non-business days.
+
+The Figure \ref{day_demand} clearly indicates a significant difference in mean demand between business days and non-business days. As noted previously for Saturday and Sunday, this may be due the fact that offices, factories not operating over holidays resulting in lower demand. Therefore we could conclude that holidays has a impact on the overall demand and therefore should be considered in the model.
 
 ```{=tex}
 \begin{figure}[H]
@@ -523,7 +524,9 @@ The graph clearly indicate a significant difference in mean demand between holid
 
 ## Hour of the day demand
 
-At the next granular level, we would like to observe how demand fluctuates within a day (hour by hour). Australian energy providers broadly segregates hourly demand to three groups \cite{wrigley_2019_peak}. Peak, off-peak and shoulder. There are variations of this by providers. For our analysis purposes, we would simplify to Peak and Off-peak only.
+At the next granular level, we would like to observe how demand fluctuates within a day (hour by hour). Australian energy providers broadly segregates hourly demand to three groups \cite{wrigley_2019_peak}. Peak, off-peak and shoulder. There are variations of this by providers. For our analysis purposes, we would simplify to Peak and Off-peak only. As evident the heatmap from the Figure \ref{hour_heat}, approximately from 7:00 AM to 10:00 PM, the demand seems to be high. Therefore, we would use that period as Peak demand and rest as off-peak demand for our model build.
+
+It should also be noted that during night, demand is quite low. This is evident in Figure \ref{hour_heat}, the heatmap with lighter shade of yellow. Overall, we could conclude that the hour of the day is an important factor in determining electricity demand.
 
 ```{=tex}
 \begin{figure}[H]
@@ -538,7 +541,7 @@ As evident from the graph, approx from 7:00 AM to 10:00 PM, the demand seems to 
 
 ## Peak vs Off-Peak demand
 
-Based on previous analysis, lets verify the variations in demand based on Peak hours vs off-peak. Additionally, we further drill-down on holidays vs non-holidays. 
+Extending the previous daily demand analysis, lets verify the variations in demand during Peak hours and off-peak hours during business days vs non-business days. In the Figure \ref{holiday_nonholiday}, the left side graph clearly indicate the difference in demand between peak and off-peak hours during business days. The average demand during peak hours is higher than the daily average demand. Conversely, average demand during off-peak hours is considerably lower than the daily average demand. There is a significant difference between peak hours demand compared to off-peak hours. On the other hand, the right side graph shows the peak and off-peak demand on non-business days which includes public holidays and weekends. The overall average seems to drop. However, the gap between the peak and off-peak demand continues similar to business days. The graphs further emphasise the importance of 'hour of the day' in determining demand.
 
 ```{=tex}
 \begin{figure}[H]
