@@ -14,13 +14,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -28,7 +28,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -37,7 +37,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -55,8 +55,11 @@
 \title{Capstone Project by Team 3\\[0.5cm]A Data Science Approach to
 Forecast Short-term Electricity Demand in NSW}
 
-\authornameonly{Karim Adham (z5468227) ¶ ¶ Rishantha Rajakaruna
-(z5441528) ¶ ¶ Rushmila Islam (z5456038) }
+\authornameonly{Karim Adham (z5468227)\\
+\strut \\
+Rishantha Rajakaruna (z5441528)\\
+\strut \\
+Rushmila Islam (z5456038) }
 
 \author{\Authornameonly}
 
@@ -169,8 +172,7 @@ and sustainable energy system in NSW.
 %\afterpage{\blankpage}
 
 
-\hypertarget{introduction}{%
-\chapter{Introduction}\label{introduction}}
+\chapter{Introduction}\label{introduction}
 
 Accurate electricity demand forecasting is a fundamental decision-making
 component for governments, regulatory bodies and businesses. We need to
@@ -208,11 +210,9 @@ to a more sustainable and efficient energy landscape.
 
 \bigskip
 
-\hypertarget{literature-review}{%
-\chapter{Literature Review}\label{literature-review}}
+\chapter{Literature Review}\label{literature-review}
 
-\hypertarget{background}{%
-\section{Background}\label{background}}
+\section{Background}\label{background}
 
 Electricity demand forecasting ensures efficient, reliable and
 cost-effective power operation systems. Accurate forecasts enable grid
@@ -245,9 +245,8 @@ critical for ensuring optimal resource allocation and cost management,
 mainly as the state integrates more renewable energy into its supply
 mix.
 
-\hypertarget{factors-affecting-load-forecasting}{%
 \section{Factors Affecting Load
-Forecasting}\label{factors-affecting-load-forecasting}}
+Forecasting}\label{factors-affecting-load-forecasting}
 
 Load forecasting usually predicts hourly, daily, weekly, and annual
 values of the system demand and peak demand. Such forecasts are
@@ -310,9 +309,8 @@ system management and operational planning decision-making.
 
 \bigskip
 
-\hypertarget{electricity-demand-forecast-methodologies}{%
 \section{Electricity Demand Forecast
-Methodologies}\label{electricity-demand-forecast-methodologies}}
+Methodologies}\label{electricity-demand-forecast-methodologies}
 
 Electricity demand or load forecasting is a well-known problem that
 involves predicting future load based on historical information.
@@ -386,8 +384,7 @@ statistical significance even if there is no correlation, thus suitable
 for real-world usage. The following sections will discuss the popular
 forecasting models used in the electricity demand forecasting domain.
 
-\hypertarget{forecasting-models}{%
-\section{Forecasting Models}\label{forecasting-models}}
+\section{Forecasting Models}\label{forecasting-models}
 
 Various techniques have been developed for electricity demand
 forecasting during the past few years. Electricity load forecasting
@@ -469,9 +466,8 @@ methods and their advantages and disadvantages. Each method has its
 strengths and weaknesses, and the choice of model depends on the
 specific requirements of the forecasting problem. \bigskip
 
-\hypertarget{challenges-to-find-the-ideal-forecasting-method}{%
 \section{Challenges to Find the Ideal Forecasting
-Method}\label{challenges-to-find-the-ideal-forecasting-method}}
+Method}\label{challenges-to-find-the-ideal-forecasting-method}
 
 This research focuses on short-term demand forecasting, an essential
 instrument in power system planning, operations, and control. Many
@@ -540,9 +536,8 @@ complex models or large-scale data, where ensuring optimal performance
 within available resources becomes a trade-off between prediction
 accuracy and computational feasibility
 
-\hypertarget{performance-metrics-and-model-evaluations}{%
 \section{Performance Metrics and Model
-Evaluations}\label{performance-metrics-and-model-evaluations}}
+Evaluations}\label{performance-metrics-and-model-evaluations}
 
 Different criteria are utilised to evaluate the load forecasting
 techniques to check the correctness of the methods used to predict real
@@ -584,11 +579,9 @@ forward chaining cross-validation techniques to evaluate the performance
 of the models. We will determine the MAE, RMSE, and MAPE to assess the
 performance of the models based on the test data.
 
-\hypertarget{material-and-methods}{%
-\chapter{Material and Methods}\label{material-and-methods}}
+\chapter{Material and Methods}\label{material-and-methods}
 
-\hypertarget{software}{%
-\section{Software}\label{software}}
+\section{Software}\label{software}
 
 The primary software used for analysis and model build is Python. We
 have used an extensive set of Python libraries. The list of libraries
@@ -610,15 +603,13 @@ Jupyter Notebook and RStudio were used as integrated development
 environments. The GitHub repository was used for code management. Teams
 and One Drive were used for collaboration and communication.
 
-\hypertarget{description-of-the-data}{%
-\section{Description of the Data}\label{description-of-the-data}}
+\section{Description of the Data}\label{description-of-the-data}
 
 This section provides a detailed description of the datasets used in
 this study.
 
-\hypertarget{total-electricity-demand-nsw}{%
 \subsection{Total Electricity Demand
-NSW}\label{total-electricity-demand-nsw}}
+NSW}\label{total-electricity-demand-nsw}
 
 Total Electricity Demand in 30 min increments. This data is sourced from
 the Market Management System database, which is published by the market
@@ -646,8 +637,7 @@ REGIONID            & Region Identifier (i.e. NSW1)                             
 \end{tabular}
 \end{table}
 
-\hypertarget{air-temperature-nsw}{%
-\subsection{Air Temperature NSW}\label{air-temperature-nsw}}
+\subsection{Air Temperature NSW}\label{air-temperature-nsw}
 
 NSW air temperature (as measured from the Bankstown Airport weather
 station). This data is sourced from the Australian Data Archive for
@@ -679,8 +669,7 @@ LOCATION            & \begin{tabular}[c]{@{}l@{}}Location of a weather station \
 \end{tabular}
 \end{table}
 
-\hypertarget{nsw-calendar}{%
-\subsection{NSW Calendar}\label{nsw-calendar}}
+\subsection{NSW Calendar}\label{nsw-calendar}
 
 Use NSW Calendar for the model build to include holidays, seasons, and
 weekend information.
@@ -703,8 +692,7 @@ MONTH               & Month of the Year                                         
 \end{tabular}
 \end{table}
 
-\hypertarget{total-forecast-demand-nsw}{%
-\subsection{Total Forecast Demand NSW}\label{total-forecast-demand-nsw}}
+\subsection{Total Forecast Demand NSW}\label{total-forecast-demand-nsw}
 
 Forecast demand in half-hourly increments for NSW. Data is also sourced
 from the Market Management System database. This dataset would be
@@ -736,11 +724,9 @@ LASTCHANGE          & \begin{tabular}[c]{@{}l@{}}Date time interval of each upda
 \end{tabular}
 \end{table}
 
-\hypertarget{pre-processing-steps}{%
-\section{Pre-processing Steps}\label{pre-processing-steps}}
+\section{Pre-processing Steps}\label{pre-processing-steps}
 
-\hypertarget{merge-and-read-zip-files}{%
-\subsection{Merge and read zip files}\label{merge-and-read-zip-files}}
+\subsection{Merge and read zip files}\label{merge-and-read-zip-files}
 
 All data files (excluding NSW Calendar) were stored in zip files.
 Instead of exacting the the content of the files, we read directly the
@@ -748,8 +734,7 @@ zip file content for data cleaning. The only exception was the forecast
 demand dataset, split into two zip files. Therefore, these files had to
 be merged into one zip before consumption.
 
-\hypertarget{data-cleaning}{%
-\section{Data Cleaning}\label{data-cleaning}}
+\section{Data Cleaning}\label{data-cleaning}
 
 The following activities were done as part of data cleaning.
 
@@ -791,8 +776,7 @@ also included. Here, `PEAK' is defined as `1' when the time of the day
 is between 7:00 AM and 10:00 PM. The time period for the peak was
 derived from \cite{canstarblue_peakoffpeak}.
 
-\hypertarget{assumptions}{%
-\section{Assumptions}\label{assumptions}}
+\section{Assumptions}\label{assumptions}
 
 The temperature data is limited to one location. Bankstown Airport.
 However, the electricity demand is measured for the entire state. As we
@@ -805,8 +789,7 @@ the manufacturing landscape has changed (as noted in the literature
 review). The impact of these factors is not part of the analysis due to
 the lack of publicly available data.
 
-\hypertarget{modelling-methods}{%
-\section{Modelling Methods}\label{modelling-methods}}
+\section{Modelling Methods}\label{modelling-methods}
 
 Based on the literature review, this study explores two popular
 models---the additive model Prophet by Facebook and the machine learning
@@ -833,8 +816,7 @@ study.
 \label{model_diagram}
 \end{figure}
 
-\hypertarget{train-test-split}{%
-\subsection{Train Test Split}\label{train-test-split}}
+\subsection{Train Test Split}\label{train-test-split}
 
 The train-test split is done differently in a time series regression
 model. Firstly, the chosen dataset is ordered chronologically to
@@ -853,13 +835,11 @@ to testing.
 \caption{Train-Test Split for Both Models}\label{traintest}
 \end{figure}
 
-\hypertarget{exploratory-data-analysis}{%
-\chapter{Exploratory Data Analysis}\label{exploratory-data-analysis}}
+\chapter{Exploratory Data Analysis}\label{exploratory-data-analysis}
 
 Let's begin by analysing the data to understand its characteristics.
 
-\hypertarget{yearly-electricity-demand}{%
-\section{Yearly Electricity Demand}\label{yearly-electricity-demand}}
+\section{Yearly Electricity Demand}\label{yearly-electricity-demand}
 
 Analysing electricity demand over the years would help identify
 historical trends and any seasonal effects. First, let's review the
@@ -879,8 +859,7 @@ data for model build would be prudent as we focus on short-term demand.
 The minimum and maximum demand fluctuate within a range, indicating no
 significant trends.
 
-\hypertarget{decompose-time-series}{%
-\section{Decompose Time series}\label{decompose-time-series}}
+\section{Decompose Time series}\label{decompose-time-series}
 
 Electricity demand data is of a time series nature. According to the
 Australian Energy Market Operator (AEMO), time series models are more
@@ -947,8 +926,7 @@ The results show that the test statistic is lower than the critical
 values. Therefore, we can reject the null hypothesis and conclude that
 the time series is stationary.
 
-\hypertarget{monthly-demand}{%
-\section{Monthly Demand}\label{monthly-demand}}
+\section{Monthly Demand}\label{monthly-demand}
 
 Let's analyse the impact of demand based on the month.
 
@@ -965,8 +943,7 @@ January and February are summer months. Conversely, Spring and Autumn
 have lower average demand. Therefore, the month/season should be
 considered for the model build.
 
-\hypertarget{day-of-the-week-demand}{%
-\section{Day of the week Demand}\label{day-of-the-week-demand}}
+\section{Day of the week Demand}\label{day-of-the-week-demand}
 
 Next, we analyse whether electricity demand fluctuates depending on the
 day of the week. As per the heatmap Figure \ref{day_heat}, weekends tend
@@ -982,8 +959,7 @@ demand. Hence, it is suitable to be included in the model build.
 \label{day_heat}
 \end{figure}
 
-\hypertarget{demand-on-holidays}{%
-\section{Demand on Holidays}\label{demand-on-holidays}}
+\section{Demand on Holidays}\label{demand-on-holidays}
 
 Extending on the day of the week demand, we would like to analyse the
 difference in average demand between Business days and non-business
@@ -1003,8 +979,7 @@ overall demand and therefore should be considered in the model.
 \label{day_demand}
 \end{figure}
 
-\hypertarget{hour-of-the-day-demand}{%
-\section{Hour of the day demand}\label{hour-of-the-day-demand}}
+\section{Hour of the day demand}\label{hour-of-the-day-demand}
 
 At the next granular level, we would like to observe how demand
 fluctuates within a day (hour by hour). Australian energy providers
@@ -1028,8 +1003,7 @@ important factor in determining electricity demand.
 \label{hour_heat}
 \end{figure}
 
-\hypertarget{peak-vs-off-peak-demand}{%
-\section{Peak vs Off-Peak demand}\label{peak-vs-off-peak-demand}}
+\section{Peak vs Off-Peak demand}\label{peak-vs-off-peak-demand}
 
 Extending the previous daily demand analysis, lets verify the variations
 in demand during Peak hours and off-peak hours during business days vs
@@ -1053,8 +1027,7 @@ similar to business days. The graphs further emphasise the importance of
 \label{holiday_nonholiday}
 \end{figure}
 
-\hypertarget{autocorrelation-lag}{%
-\section{Autocorrelation \& Lag}\label{autocorrelation-lag}}
+\section{Autocorrelation \& Lag}\label{autocorrelation-lag}
 
 We would like to understand the influence of Lag in the chosen model.
 Prior to that lets review the concept.
@@ -1095,9 +1068,8 @@ The PACF graph shows a significant spike in lags 1, 2, and 3 but seems
 to decay as it moves. Hence, it may be useful to limit the model to 3
 lags.
 
-\hypertarget{temperature-and-demand-relationship}{%
 \section{Temperature and demand
-relationship}\label{temperature-and-demand-relationship}}
+relationship}\label{temperature-and-demand-relationship}
 
 The relationship between temperature and electricity demand is well
 known. In the graph below, it is evident that demand increases as
@@ -1116,8 +1088,7 @@ demand.
 \label{temperature_demand}
 \end{figure}
 
-\hypertarget{correlation-matrix}{%
-\section{Correlation matrix}\label{correlation-matrix}}
+\section{Correlation matrix}\label{correlation-matrix}
 
 Finally, we look at the correlation between the attributes. The graph
 below shows a very low correlation between Total Demand and Temperature.
@@ -1132,8 +1103,7 @@ Peak/off-peak seem to have a higher correlation.
 \label{correlation_matrix}
 \end{figure}
 
-\hypertarget{covid-impact-on-demand}{%
-\section{Covid impact on Demand}\label{covid-impact-on-demand}}
+\section{Covid impact on Demand}\label{covid-impact-on-demand}
 
 Since the dataset used overlaps with the Covid period, it is essential
 to understand if there is any impact on overall demand.
@@ -1150,14 +1120,11 @@ on the graph, one could conclude that the 2020 COVID-19 period had
 minimal impact on overall demand. However, further research is warranted
 to confirm this finding.
 
-\hypertarget{model-analysis-and-results}{%
-\chapter{Model Analysis and Results}\label{model-analysis-and-results}}
+\chapter{Model Analysis and Results}\label{model-analysis-and-results}
 
-\hypertarget{xgboost}{%
-\section{XGBoost}\label{xgboost}}
+\section{XGBoost}\label{xgboost}
 
-\hypertarget{model-specification}{%
-\subsection{Model Specification}\label{model-specification}}
+\subsection{Model Specification}\label{model-specification}
 
 XGBoost can be adjusted from standard regression to time series
 regression by applying data transformations to add lag features as
@@ -1251,8 +1218,7 @@ value is: \[
 residuals are calculated again, repeating until the maximum number of
 trees is reached or the model does not improve.
 
-\hypertarget{hyperparameter-tuning}{%
-\subsection{Hyperparameter Tuning}\label{hyperparameter-tuning}}
+\subsection{Hyperparameter Tuning}\label{hyperparameter-tuning}
 
 Hyperparameter tuning is critical to improving model accuracy. The two
 methods considered for tuning are Grid Search and Random Search. Grid
@@ -1324,11 +1290,9 @@ results after a random search are:
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{model-outcomes}{%
-\subsection{Model Outcomes}\label{model-outcomes}}
+\subsection{Model Outcomes}\label{model-outcomes}
 
-\hypertarget{feature-importance}{%
-\subsubsection{Feature Importance}\label{feature-importance}}
+\subsubsection{Feature Importance}\label{feature-importance}
 
 The F score represents the number of times a feature is used to split
 data. The higher the f-score, the more critical a feature is to the
@@ -1358,9 +1322,8 @@ the time interval forecasted.
 \caption{Feature Importance for XGBoost Model}\label{featureimp}
 \end{figure}
 
-\hypertarget{actual-predicted-values}{%
 \subsubsection{Actual \& Predicted
-Values}\label{actual-predicted-values}}
+Values}\label{actual-predicted-values}
 
 The Figure \ref{actualpredict} shows an upward-sloping diagonal line,
 which indicates that the model did an excellent job predicting the
@@ -1372,8 +1335,7 @@ target variable.
 \caption{Feature Importance for XGBoost Model}\label{actualpredict}
 \end{figure}
 
-\hypertarget{model-metrics}{%
-\subsubsection{Model Metrics}\label{model-metrics}}
+\subsubsection{Model Metrics}\label{model-metrics}
 
 The two metrics used to measure performance are root mean squared error
 (RMSE) and mean absolute error (MAE).
@@ -1395,37 +1357,32 @@ means that, on average, the model is off by 70.77MW. The MAPE is 1\% of
 the target range (5000 MW---13000 MW). This suggests that the model is
 performing reasonably well.
 
-\hypertarget{forecasting}{%
-\subsection{Forecasting}\label{forecasting}}
+\subsection{Forecasting}\label{forecasting}
 
 The last 17 days of the dataset will be forecasted using the XGBoost and
 Prophet models to compare with the provided AEMO forecasted demand.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{RMSE: }\FloatTok{232.56}
-\NormalTok{MAE: }\FloatTok{160.14}
-\NormalTok{MAPE: }\FloatTok{2.0}\OperatorTok{\%}
+\NormalTok{RMSE: }\FloatTok{88.13}
+\NormalTok{MAE: }\FloatTok{67.04}
+\NormalTok{MAPE: }\FloatTok{1.0}\OperatorTok{\%}
 \end{Highlighting}
 \end{Shaded}
 
-XGBoost and Facebook Prophet had lower errors compared to the AEMO
-forecast model. Since both RMSE and MAE are lower for XGBoost and
-Facebook Prophet, Both models generally perform better across small and
-large errors. The plot below shows how the models predicted actual
-demand. We can see that XGBoost follows the actual demand more closely.
+The Figure \ref{xgboost_prediction} shows the forecasted demand for last
+17 days of the dataset using the XGBoost model compared to the actual
+demand.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth, height=5cm]{forecastplot.png}
-\caption{Forecast plot of XGBoost Model}\label{forecastplot}
+\includegraphics[width=0.95\textwidth, height=5cm]{xgboost_prediction.png}
+\caption{Forecast plot of XGBoost Model}\label{xgboost_prediction}
 \end{figure}
 
-\hypertarget{facebook-prophet}{%
-\section{Facebook Prophet}\label{facebook-prophet}}
+\section{Facebook Prophet}\label{facebook-prophet}
 
-\hypertarget{model-specifications}{%
-\subsection{Model Specifications}\label{model-specifications}}
+\subsection{Model Specifications}\label{model-specifications}
 
 Prophet was developed internally at Facebook (now known as Meta) to
 optimally handle business forecasting tasks, typically featuring
@@ -1520,8 +1477,7 @@ handle multiple types of seasonality, holidays, and missing data. We
 will walk through data pre-processing, model parameter tuning, and
 cross-validation to evaluate the model's performance.
 
-\hypertarget{data-pre-processing}{%
-\subsection{Data pre-processing}\label{data-pre-processing}}
+\subsection{Data pre-processing}\label{data-pre-processing}
 
 Prophet follows the sklearn model API structure, where we first create
 an instance of the \texttt{Prophet} class and then use its \texttt{fit}
@@ -1536,8 +1492,7 @@ timestamp. So, we have changed our \texttt{DATETIME} column to
 representing the variable we want to forecast, thus we change the
 \texttt{DEMAND} column to \texttt{y} column.
 
-\hypertarget{hyper-parameter-tuning}{%
-\subsection{Hyper-parameter tuning}\label{hyper-parameter-tuning}}
+\subsection{Hyper-parameter tuning}\label{hyper-parameter-tuning}
 
 For the model prophet it is recommended to tune the parameters like -
 \linebreak \texttt{changepoint\_prior\_scale},
@@ -1589,8 +1544,7 @@ squared error.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{model-parameters}{%
-\subsection{Model parameters}\label{model-parameters}}
+\subsection{Model parameters}\label{model-parameters}
 
 Our model considers holidays, so we need to create a dataframe for them.
 It has two columns (\texttt{holiday} and \texttt{ds}) and a row for each
@@ -1639,8 +1593,7 @@ We these parameters in the model as additional regressors :
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{cross-validation}{%
-\subsection{Cross-Validation}\label{cross-validation}}
+\subsection{Cross-Validation}\label{cross-validation}
 
 The traditional method to tune model's performance is the
 \textbf{hold-out} validation that splits the whole dataset in to
@@ -1673,8 +1626,7 @@ dates when each horizon will begin.
 \caption{Cross-validation terminology}\label{cross_validation_output}
 \end{figure}
 
-\hypertarget{model-results}{%
-\subsection{Model Results}\label{model-results}}
+\subsection{Model Results}\label{model-results}
 
 Below is the result of the Prophet model:
 
@@ -1731,8 +1683,7 @@ is shown. And we can see that the model has done a good job in
 predicting the demand for the test data as the actual and predicted
 demand are very closely concentrated around the line.
 
-\hypertarget{model-forecast}{%
-\subsection{Model Forecast}\label{model-forecast}}
+\subsection{Model Forecast}\label{model-forecast}
 
 The Fig \ref{prophet_actual_predict_output} shows the forecast for 17
 days for March 2021:
@@ -1743,9 +1694,8 @@ days for March 2021:
 \caption{Forecast demand using Prophet model}\label{prophet_actual_predict_output}
 \end{figure}
 
-\hypertarget{model-comparison-and-discussion}{%
 \chapter{Model comparison and
-Discussion}\label{model-comparison-and-discussion}}
+Discussion}\label{model-comparison-and-discussion}
 
 XGBoost excels in handling complex non-linear relationships but does not
 account for time series components like trends and seasonality. It
@@ -1755,6 +1705,29 @@ capture temporal dependencies. However, Facebook Prophet is designed
 with time series forecasting in mind. Prophet deploys additive models
 that naturally incorporate trends (yearly, monthly, and daily). It is
 powerful when handling time series.
+
+\begin{table}[h]
+\centering
+\caption{XGBoost, Prophet and AEMO Model Comparison}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\hline
+\textbf{Model} & \textbf{RMSE} & \textbf{MAE} & \textbf{MAPE}\\ 
+\hline
+XGBoost & 88.13 & 67.04 & 1.0\% \\ 
+\hline
+Prophet & 153.13 & 132.16 & 1.8\% \\ 
+\hline
+AEMO & 173.61 & 131.69 & 2.0\% \\ 
+\hline
+\end{tabular}
+\end{table}
+
+XGBoost and Facebook Prophet had lower errors compared to the AEMO
+forecast model. Since both RMSE and MAE are lower for XGBoost and
+Facebook Prophet, Both models generally perform better across small and
+large errors. The plot below shows how the models predicted actual
+demand. We can see that XGBoost follows the actual demand more closely.
 
 Both models are flexible and can process any time interval. XGBoost's
 performance is based on the feature engineering approach. The features
@@ -1815,8 +1788,16 @@ actual demand more closely than the Prophet and AEMO models.
 \caption{Forecast demand comparison among AEMO, XGBoost and Prophet}\label{AEMO_Prophet_XGBoost}
 \end{figure}
 
-\hypertarget{conclusion-and-future-work}{%
-\chapter{Conclusion and Future Work}\label{conclusion-and-future-work}}
+This Figure \ref{AEMO_Prophet_XGBoost_17} shows the forecasted demand
+from AEMO, XGBoost and Prophet for 17 days.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth, height=5cm]{AEMO_Prophet_XGBoost_17.png}
+\caption{Forecast demand comparison among AEMO, XGBoost and Prophet}\label{AEMO_Prophet_XGBoost_17}
+\end{figure}
+
+\chapter{Conclusion and Future Work}\label{conclusion-and-future-work}
 
 We built, tested, and compared popular machine-learning models --
 XGBoost and with an additive model -- Prophet. XGBoost is highly
@@ -1861,19 +1842,16 @@ will also explore popular deep learning models like LSTM and other
 pre-trained models like DeepAR for short-term electricity load
 forecasting.
 
-\hypertarget{references}{%
-\chapter*{References}\label{references}}
+\chapter*{References}\label{references}
 \addcontentsline{toc}{chapter}{References}
 
 \bibliographystyle{elsarticle-harv} 
 \bibliography{references}
 
-\hypertarget{appendix}{%
-\chapter*{Appendix}\label{appendix}}
+\chapter*{Appendix}\label{appendix}
 \addcontentsline{toc}{chapter}{Appendix}
 
-\hypertarget{figures}{%
-\section*{\texorpdfstring{\textbf{Figures}}{Figures}}\label{figures}}
+\section*{\texorpdfstring{\textbf{Figures}}{Figures}}\label{figures}
 \addcontentsline{toc}{section}{\textbf{Figures}}
 
 \begin{figure}[H]
@@ -1883,8 +1861,7 @@ forecasting.
 Derived from Department of the Environment and Energy, Australian Energy Statistics, Table O, June 2021]}\label{renewable}
 \end{figure}
 
-\hypertarget{tables}{%
-\section*{\texorpdfstring{\textbf{Tables}}{Tables}}\label{tables}}
+\section*{\texorpdfstring{\textbf{Tables}}{Tables}}\label{tables}
 \addcontentsline{toc}{section}{\textbf{Tables}}
 
 

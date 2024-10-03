@@ -762,19 +762,19 @@ The RMSE measures the average size of the error between the actual and predicted
 The last 17 days of the dataset will be forecasted using the XGBoost and Prophet models to compare with the provided  AEMO forecasted demand. 
 
 ```python
-RMSE: 232.56
-MAE: 160.14
-MAPE: 2.0%
+RMSE: 88.13
+MAE: 67.04
+MAPE: 1.0%
 ```
 
-XGBoost and Facebook Prophet had lower errors compared to the AEMO forecast model. Since both RMSE and MAE are lower for XGBoost and Facebook Prophet, Both models generally perform better across small and large errors. The plot below shows how the models predicted actual demand. We can see that XGBoost follows the actual demand more closely.
 
+The Figure \ref{xgboost_prediction} shows the forecasted demand for last 17 days of the dataset using the XGBoost model compared to the actual demand.
 
 ```{=tex}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth, height=5cm]{forecastplot.png}
-\caption{Forecast plot of XGBoost Model}\label{forecastplot}
+\includegraphics[width=0.95\textwidth, height=5cm]{xgboost_prediction.png}
+\caption{Forecast plot of XGBoost Model}\label{xgboost_prediction}
 \end{figure}
 ```
 
@@ -953,6 +953,27 @@ The Fig \ref{prophet_actual_predict_output} shows the forecast for 17 days for M
 
 XGBoost excels in handling complex non-linear relationships but does not account for time series components like trends and seasonality. It requires manual feature engineering to forecast time series data, such as transforming hours using Cosine and adding a demand lag column to capture temporal dependencies. However, Facebook Prophet is designed with time series forecasting in mind. Prophet deploys additive models that naturally incorporate trends (yearly, monthly, and daily). It is powerful when handling time series.
 
+```{=tex}
+\begin{table}[h]
+\centering
+\caption{XGBoost, Prophet and AEMO Model Comparison}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\hline
+\textbf{Model} & \textbf{RMSE} & \textbf{MAE} & \textbf{MAPE}\\ 
+\hline
+XGBoost & 88.13 & 67.04 & 1.0\% \\ 
+\hline
+Prophet & 153.13 & 132.16 & 1.8\% \\ 
+\hline
+AEMO & 173.61 & 131.69 & 2.0\% \\ 
+\hline
+\end{tabular}
+\end{table}
+```
+
+XGBoost and Facebook Prophet had lower errors compared to the AEMO forecast model. Since both RMSE and MAE are lower for XGBoost and Facebook Prophet, Both models generally perform better across small and large errors. The plot below shows how the models predicted actual demand. We can see that XGBoost follows the actual demand more closely.
+
 Both models are flexible and can process any time interval. XGBoost’s performance is based on the feature engineering approach. The features must capture the dynamics of electricity demand at this granularity for short intervals. Facebook Prophet automatically detects and captures patterns in half-hour electricity demand data. Facebook Prophet is more user-friendly than XGBoost. Its components are understandable, making understanding the factors influencing the forecast easier. While XGBoost requires careful feature engineering and parameter tuning, model interpretation is challenging due to the ensemble nature of the model.
 
 Facebook Prophet is tailored for time series data. It has built-in mechanisms to capture trends, making it a robust model for electricity demand forecasting at different intervals. XGBoost is highly accurate in many domains and is one of the most used models in machine learning competitions. However, without adequate feature engineering to address temporal relationships, XGBoost may not perform as effectively as models designed for time series.
@@ -975,6 +996,14 @@ The Fig \ref{AEMO_Prophet_XGBoost} compares the forecasted demand among the AEMO
 \end{figure}
 ```
 
+This Figure \ref{AEMO_Prophet_XGBoost_17} shows the forecasted demand from AEMO, XGBoost and Prophet for 17 days. 
+```{=tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth, height=5cm]{AEMO_Prophet_XGBoost_17.png}
+\caption{Forecast demand comparison among AEMO, XGBoost and Prophet}\label{AEMO_Prophet_XGBoost_17}
+\end{figure}
+```
 
 # Conclusion and Future Work {.label:ccl}
 
