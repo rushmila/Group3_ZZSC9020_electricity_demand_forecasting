@@ -1677,7 +1677,7 @@ dates when each horizon will begin.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth, height=5cm]{cross_validation_output.png}
+\includegraphics[width=0.95\textwidth, height=5cm]{cutoff_crossvalidation.png}
 \caption{Cross-validation terminology}\label{cross_validation_output}
 \end{figure}
 
@@ -1727,6 +1727,17 @@ of holidays on the electricity demand. As we have predicted the
 \caption{Component plots of model Prophet}\label{prophet_component_plot}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth, height=5cm]{prophet_actual_predict.png}
+\caption{Actual vs predicted demand using Prophet model}\label{prophet_actual}
+\end{figure}
+
+In the Figure \ref{prophet_actual}, the actual and the predicted demand
+is shown. And we can see that the model has done a good job in
+predicting the demand for the test data as the actual and predicted
+demand are very closely concentrated around the line.
+
 \subsection{Model Forecast}\label{model-forecast}
 
 The Fig \ref{prophet_actual_predict_output} shows the forecast for 17
@@ -1735,13 +1746,7 @@ days for March 2021:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth, height=5cm]{prophet_actual_predict_output.png}
-\caption{Actual vs Predicted demand: Prophet model Prophet}\label{prophet_actual_predict_output}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth, height=5cm]{prophet_actual_predict.png}
-\caption{Actual vs Predicted Demaand: Prophet model}\label{prophet_actual}
+\caption{Forecast demand using Prophet model}\label{prophet_actual_predict_output}
 \end{figure}
 
 \chapter{Model comparison and
