@@ -469,19 +469,20 @@ Many operating decisions are based on load forecasts such as dispatch
 scheduling of generating capacity, reliability analysis, and maintenance
 planning for the generators. Overestimation of electricity demand will
 cause a conservative operation which may lead to overproduction or
-excessive energy purchase. For instance, in \cite{AEMO} AEMO uses a
-monthly regression model based on 5 years of historical data to capture.
-This period is chosen to balance capturing recent univariate consumption
-trends while being long enough to capture for seasonal patterns for
-reliable analysis. Univariate models, while simpler, often struggle to
-capture complex relationships and seasonal patterns in load data.
-Multivariate models, incorporating additional factors like temperature,
-humidity, and economic indicators, can improve accuracy but introduce
-challenges in data collection, preprocessing, and model complexity, thus
-require careful feature engineering. Univariate models use only
-historical demand data to make future predictions, while multivariate
-models consider other variables such as atmospheric variations and
-calendars along with historical demand data in the study of STLF
+excessive energy purchase. On the other hand, insufficient production
+may lead to load shedding. In \cite{AEMO}, a monthly regression model is
+used that is based on 5 years of historical data to capture. This period
+is chosen to balance capturing recent univariate consumption trends
+while being long enough to capture for seasonal patterns for reliable
+analysis. Univariate models, while simpler, often struggle to capture
+complex relationships and seasonal patterns in load data. Multivariate
+models, incorporating additional factors like temperature, humidity, and
+economic indicators, can improve accuracy but introduce challenges in
+data collection, preprocessing, and model complexity, thus require
+careful feature engineering. Univariate models use only historical
+demand data to make future predictions, while multivariate models
+consider other variables such as atmospheric variations and calendars
+along with historical demand data in the study of STLF
 \cite{wang2016review} and \cite{chen2015electricity}, both highlight the
 limitations of traditional methods and the growing interest in advanced
 hybrid techniques. Therefore, the selection of an ideal forecasting
@@ -738,7 +739,9 @@ Following activities were done as part of data cleaning.
       \item Total Forecast Demand NSW - REGIONID, PREDISPATCHSEQNO, PERIODID and LASTCHANGED were removed as they are not used for analysis
     \end{itemize}
   \item Removal of unused rows
+    \begin{itemize}
     \item Total Forecast Demand NSW - Removes any data older than 2018-01-01 and derive the mean for the each date + time combination.
+    \end{itemize}
   \item Verify whether NULL values exist. None found in the files.
   \item Validate whether duplicate rows exist
     \begin{itemize}
@@ -1079,7 +1082,7 @@ could conclude that 2020 Covid period had minimal impact on overall
 demand based on the graph. However, further research is warranted to
 confirm the finding.
 
-\chapter{Analysis and Results}\label{analysis-and-results}
+\chapter{Model Analysis and Results}\label{model-analysis-and-results}
 
 \section{XGBoost}\label{xgboost}
 
