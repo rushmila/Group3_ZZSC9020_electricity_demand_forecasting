@@ -531,7 +531,7 @@ The Figure \ref{day_demand} clearly indicates a significant difference in mean d
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.80\textwidth,height=6cm]{day_demand.png}
-\caption{Mean Demand Holiday vs Non-Holiday}
+\caption{Mean Demand Business days vs Non-Business days}
 \label{day_demand}
 \end{figure}
 ```
@@ -561,7 +561,7 @@ Extending the previous daily demand analysis, lets verify the variations in dema
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.80\textwidth,height=6cm]{holiday_nonholiday.png}
-\caption{Peak vs Off-Peak Demand on Holiday vs Non-Holiday}
+\caption{Peak vs Off-Peak Demand on Business days and Non-Business days}
 \label{holiday_nonholiday}
 \end{figure}
 ```
