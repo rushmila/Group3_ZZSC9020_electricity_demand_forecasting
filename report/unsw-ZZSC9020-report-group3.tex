@@ -183,7 +183,13 @@ economic growth are vital factors influencing demand \cite{a2024_nem}.
 Additionally, the generation of electricity through renewable sources
 such as solar and wind, which doubled over the last decade, has added
 more complexity to forecasting due to its dependency on
-weather\sloppy{\cite{energygovau_2024_renewables}}.
+weather\sloppy{\cite{energygovau_2024_renewables}}. Electricity
+consumption is forecasted to increase as electric vehicle charging and
+broader electrification begin to impact electricity demand
+significantly. In 2019--20, renewable energy sources accounted for
+approximately 19\% of the state's total electricity generation, a
+significant increase from past years
+\cite{nsw_epa_2021_energy_consumption}.
 
 Demand forecasting varies from short to medium and long-term. The
 parameters that influence each period type also vary. Short-term
@@ -235,15 +241,9 @@ industry. Also, improvements in the energy efficiency of appliances and
 machinery helped decrease electricity demand. In addition, the
 increasing adoption of rooftop solar panels and battery storage systems
 is anticipated to further lower residential demand on the electricity
-grid. Beyond the five-year mark, consumption is forecasted to increase
-as electric vehicle charging and broader electrification begin to impact
-electricity demand significantly. In 2019--20, renewable energy sources
-accounted for approximately 19\% of the state's total electricity
-generation, a significant increase from past years
-\cite{nsw_epa_2021_energy_consumption}. Accurate demand prediction is
-critical for ensuring optimal resource allocation and cost management,
-mainly as the state integrates more renewable energy into its supply
-mix.
+grid. Accurate demand prediction is critical for ensuring optimal
+resource allocation and cost management, mainly as the state integrates
+more renewable energy into its supply mix.
 
 \section{Factors Affecting Load
 Forecasting}\label{factors-affecting-load-forecasting}
@@ -555,9 +555,11 @@ metrics used by researchers are shown below:
 \hline
 \textbf{Name of criteria} & \textbf{Formula} \\ 
 \hline
-Mean Absolute Error (MAE) & $\frac{\sum_{i=1}^n|\hat{y_i}-y_i|}{n}$ \\ 
+Mean Square Error (MSE) & ${\frac{1}{n}\sum_{i=1}^{n}(\hat{y_i} - y_i)^2}$ \\ 
 \hline
-Root Mean Square Error (RMSE) & $\sqrt{\frac{1}{n}\sum_{i=1}^{n}(\hat(y_i) - y_i)^2}$ \\ 
+Root Mean Square Error (RMSE) & $\sqrt{\frac{1}{n}\sum_{i=1}^{n}(\hat{y_i} - y_i)^2}$ \\ 
+\hline
+Mean Absolute Error (MAE) & $\frac{\sum_{i=1}^n|\hat{y_i}-y_i|}{n}$ \\ 
 \hline
 Mean Percentage Error (MAPE) & $\frac{1}{n}\sum_{i=1}^{n}\frac{(y_i-\hat{y_i})}{y_i}$ \\ 
 \hline
@@ -617,6 +619,8 @@ operator from the National Electricity Market (NEM) system and
 downloaded from \cite{UNSW_project}.
 
 \begin{table}[h]
+\centering
+\caption{File Details}
 \tiny
 \begin{tabular}{@{}|l|l|l|l|@{}}
 \toprule
@@ -626,6 +630,8 @@ downloaded from \cite{UNSW_project}.
 \end{table}
 
 \begin{table}[h]
+\centering
+\caption{File Attributes}
 \tiny
 \begin{tabular}{@{}|l|l|l|@{}}
 \toprule
@@ -648,6 +654,8 @@ demand. Therefore, this dataset is critically essential for the research
 question
 
 \begin{table}[h]
+\centering
+\caption{File Details}
 \tiny
 \begin{tabular}{@{}|l|l|l|l|@{}}
 \toprule
@@ -658,6 +666,8 @@ question
 \end{table}
 
 \begin{table}[h]
+\centering
+\caption{File Attributes}
 \tiny
 \begin{tabular}{@{}|l|l|l|@{}}
 \toprule
@@ -675,6 +685,8 @@ Use NSW Calendar for the model build to include holidays, seasons, and
 weekend information.
 
 \begin{table}[h]
+\centering
+\caption{Calendar Details}
 \tiny
 \begin{tabular}{@{}|l|l|l|@{}}
 \toprule
@@ -700,6 +712,8 @@ valuable for validating the outcome of our model, especially for
 understanding its accuracy.
 
 \begin{table}[h]
+\centering
+\caption{File Details}
 \tiny
 \begin{tabular}{@{}|l|l|l|l|@{}}
 \toprule
@@ -710,6 +724,8 @@ understanding its accuracy.
 \end{table}
 
 \begin{table}[h]
+\centering
+\caption{File Attributes}
 \tiny
 \begin{tabular}{@{}|l|l|l|@{}}
 \toprule
@@ -1208,7 +1224,7 @@ the Gain value. A smaller Gain value means it is easier to prune
 branches and even whole trees \cite{a2016_how}.
 
 Prediction formula (Sneha, 2020): \[
-\text{Predicted values} = \text{Average total demand} + \text{Learning rate} * \text{Average of each leaf}
+\text{Predicted values} = \text{Average total demand} + \text{Learning rate} \times \text{Average of each leaf}
 \] For example, the initial prediction is that the average total demand
 is 7,000 MW, and the learning rate is 0.3. The first observation had a
 temperature of 20, so the average of that leaf was -25. The predicted
@@ -1290,6 +1306,31 @@ results after a random search are:
 \end{Highlighting}
 \end{Shaded}
 
+\subsection{Model Validation}\label{model-validation}
+
+The box plot in Figure \ref{xg_validation} shows the mean squared error
+across five splits. Fold two has a higher variability in RMSE compared
+to other folds. There are many outliers with much higher RMSE values,
+which could indicate that the model struggled to maintain consistent
+performance. Folds one and five have tighter boxes, suggesting more
+stable and consistent performance in those periods.
+
+Several outliers are present in all the folds, which might indicate that
+the model cannot handle specific instances well. Fold two has the most
+significant RMSE outlier, showcasing that the model could be quite off
+from actual demand. The median ranges between 100 and 200 RMSE,
+suggesting the overall performance across different splits is stable.
+The small interquartile range in folds one, three, four, and five could
+indicate that the model generalises well. However, fold two suggests
+that the model can potentially deal with high variance during specific
+times.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth, height=5cm]{xg_validation.png}
+\caption{Cross Validation Performance for XGBoost Model}\label{xg_validation}
+\end{figure}
+
 \subsection{Model Outcomes}\label{model-outcomes}
 
 \subsubsection{Feature Importance}\label{feature-importance}
@@ -1337,8 +1378,8 @@ target variable.
 
 \subsubsection{Model Metrics}\label{model-metrics}
 
-The two metrics used to measure performance are root mean squared error
-(RMSE) and mean absolute error (MAE).
+The three metrics used to measure performance are root mean squared
+error (RMSE) and mean absolute error (MAE).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1370,9 +1411,12 @@ Prophet models to compare with the provided AEMO forecasted demand.
 \end{Highlighting}
 \end{Shaded}
 
-The Figure \ref{xgboost_prediction} shows the forecasted demand for last
+Figure \ref{xgboost_prediction} shows the forecasted demand for the last
 17 days of the dataset using the XGBoost model compared to the actual
-demand.
+demand. XGBoost follows the general pattern of the actual demand. The
+model was able to predict the peaks and valleys, which are often more
+volatile and challenging to predict. There doesn't seem to be any
+prediction lag, as the model effectively captures rapid changes.
 
 \begin{figure}[H]
 \centering
@@ -1528,8 +1572,8 @@ for tuning:
 Prophet does not have a built in grid search method so we have used
 \texttt{sklearn} the \texttt{ParameterGrid} method from the
 \texttt{sklearn} library to tune the hyper-parameters. We have specified
-the grid parameters and run the grid search. We have used. We have used
-the \texttt{mean\_squared\_error} as the scoring parameter for the grid
+the grid parameters and run the grid search. We have used the
+\texttt{mean\_squared\_error} as the scoring parameter for the grid
 search. The best parameters are selected based on the lowest mean
 squared error.
 
@@ -1608,17 +1652,14 @@ have used \texttt{cutoffs} keyword \texttt{cross\_validation\ function}
 and specify the custom cutoffs.
 
 In the Fig \ref{cross_validation_output} we have shown the terminology
-used in the cross-validation method. - \texttt{initial} is the first
-training period. In Fig \ref{cross_validation_output}, it would be the
-first two blocks of data in the first fold. It is the minimum amount of
-data needed to begin the training and we need to at least have 365.6
-days of data. Considering our dataset we have used 14 months as
-\texttt{initial} parameter. the first fold to capture the yearly
-seasonality. - \texttt{horizon} is the length of time we want to
-evaluate the forecast over, in this case we have set the horizon to 15
-days. - \texttt{period} is the amount of time between each fold. We have
-used approximately 7 months as the period. - \texttt{cutoffs} are the
-dates when each horizon will begin.
+used in the cross-validation method.
+
+\begin{itemize}
+  \item `initial` is the first training period. In Fig \ref{cross_validation_output}, it would be the first two blocks of data in the first fold. It is the minimum amount of data needed to begin the training and we need to at least have 365.6 days of data to capture the yearly seasonality. Considering our dataset we have used 420 days  (14 months) as `initial` parameter.
+  \item `horizon` is the length of time we want to evaluate the forecast over, in this case we have set the horizon to 15 days.
+  \item `period` is the amount of time between each fold. We have used approximately 90 days as the period.
+  \item `cutoffs` are the dates when each horizon will begin.
+\end{itemize}
 
 \begin{figure}[H]
 \centering
@@ -1632,26 +1673,26 @@ Below is the result of the Prophet model:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Root Mean Squared Error: }\FloatTok{111.5663}
-\NormalTok{Mean Absolute Error: }\FloatTok{87.6737}
-\NormalTok{Mean Absolute Percentage Error: }\FloatTok{0.0118}
+\NormalTok{Root Mean Squared Error: }\FloatTok{111.57}
+\NormalTok{Mean Absolute Error: }\FloatTok{87.67}
+\NormalTok{Mean Absolute Percentage Error: }\FloatTok{0.01}
 \end{Highlighting}
 \end{Shaded}
 
 The model has performed well in forecasting the electricity demand for
-the test data. The MAPE is 0.0118 which is 1.18\% and indicates that the
+the test data. The MAPE is 0.01 which is 1.0\% and indicates that the
 model is performing well.
 
 The result of cross validation:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{    Cutoff      MSE           RMSE          MAE         MAPE}
-\DecValTok{0}   \DecValTok{2019}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{4}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{1}  \FloatTok{6730.187098}   \FloatTok{82.037718}     \FloatTok{61.726130}   \FloatTok{0.008176}
-\DecValTok{1}   \DecValTok{2019}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{7}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{1}  \FloatTok{14260.09658}   \FloatTok{119.41565}     \FloatTok{85.875777}   \FloatTok{0.009713}
-\DecValTok{2}   \DecValTok{2019}\OperatorTok{{-}}\DecValTok{11}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{1}  \FloatTok{7165.935874}   \FloatTok{84.651851}     \FloatTok{65.489314}   \FloatTok{0.009165}
-\DecValTok{3}   \DecValTok{2020}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{3}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{1}  \FloatTok{6782.806298}   \FloatTok{82.357794}     \FloatTok{64.052253}   \FloatTok{0.008441}
-\DecValTok{4}   \DecValTok{2020}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{7}\OperatorTok{{-}}\DecValTok{13}  \FloatTok{17569.08641}   \FloatTok{132.54843}     \FloatTok{96.610446}   \FloatTok{0.010811}
+\NormalTok{Cutoff                MSE          RMSE       MAE     MAPE}
+\DecValTok{2019}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{7}\OperatorTok{{-}}\DecValTok{15} \DecValTok{18}\NormalTok{:}\DecValTok{30}\NormalTok{:}\DecValTok{00}   \FloatTok{13920.91}    \FloatTok{87.61}       \FloatTok{87.61}   \FloatTok{1.00}
+\DecValTok{2019}\OperatorTok{{-}}\DecValTok{10}\OperatorTok{{-}}\DecValTok{13} \DecValTok{18}\NormalTok{:}\DecValTok{30}\NormalTok{:}\DecValTok{00}   \FloatTok{6465.12}     \FloatTok{63.24}       \FloatTok{63.24}   \FloatTok{0.88}
+\DecValTok{2020}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{1}\OperatorTok{{-}}\DecValTok{11} \DecValTok{18}\NormalTok{:}\DecValTok{30}\NormalTok{:}\DecValTok{00}   \FloatTok{10061.93}    \FloatTok{77.71}       \FloatTok{77.71}   \FloatTok{0.96}
+\DecValTok{2020}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{4}\OperatorTok{{-}}\DecValTok{10} \DecValTok{18}\NormalTok{:}\DecValTok{30}\NormalTok{:}\DecValTok{00}   \FloatTok{8314.68}     \FloatTok{66.03}       \FloatTok{66.03}   \FloatTok{0.95}
+\DecValTok{2020}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{7}\OperatorTok{{-}}\DecValTok{0}\ErrorTok{9} \DecValTok{18}\NormalTok{:}\DecValTok{30}\NormalTok{:}\DecValTok{00}   \FloatTok{16096.51}    \FloatTok{92.95}       \FloatTok{92.95}   \FloatTok{1.04}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1778,9 +1819,11 @@ better, but this comes at the cost of model forecast period flexibility.
 Our model will struggle if used to forecast a long-time horizon compared
 to the AEMO model.
 
-The Fig \ref{AEMO_Prophet_XGBoost} compares the forecasted demand among
-the AEMO, XGBoost, and Prophet models. The XGBoost model follows the
-actual demand more closely than the Prophet and AEMO models.
+Figures \ref{AEMO_Prophet_XGBoost} and \ref{AEMO_Prophet_XGBoost_17}
+compare the forecasted demand among the AEMO, XGBoost, and Prophet
+models for a single day and for an extended period for seventeen days
+respectively. The XGBoost model follows the actual demand more closely
+than the Prophet and AEMO models.
 
 \begin{figure}[H]
 \centering
@@ -1788,14 +1831,18 @@ actual demand more closely than the Prophet and AEMO models.
 \caption{Forecast demand comparison among AEMO, XGBoost and Prophet}\label{AEMO_Prophet_XGBoost}
 \end{figure}
 
-This Figure \ref{AEMO_Prophet_XGBoost_17} shows the forecasted demand
-from AEMO, XGBoost and Prophet for 17 days.
-
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth, height=5cm]{AEMO_Prophet_XGBoost_17.png}
 \caption{Forecast demand comparison among AEMO, XGBoost and Prophet}\label{AEMO_Prophet_XGBoost_17}
 \end{figure}
+
+The XGBoost model was able to predict the peaks and valleys, which are
+often more volatile and challenging to predict. As we observe from the
+Figure \ref{AEMO_Prophet_XGBoost}, during the peak hours from 9am to 3pm
+both of our models forecasted better but during the off-peak hour
+XGBoost model forecasted better than Prophet model Also we observe the
+AEMO model is underpredicting the demand.
 
 \chapter{Conclusion and Future Work}\label{conclusion-and-future-work}
 
