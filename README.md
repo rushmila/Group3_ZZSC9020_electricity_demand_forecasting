@@ -1,31 +1,35 @@
 # Welcome to ZZSC9020 GitHub repository for GROUP-3
 
-This GitHub repository is the main point of access for students and lecturers of the ZZSC9020 capstone course. 
-
-In this repository, you will find the data to start developing your project. Also, we will use the repository to share code, documentation, data, models and other resources between the group members and course lecturers.
-
-Complete the information below regarding your group.
+This GitHub repository stores the data files, source code, model results, model outputs and project report artifacts. 
 
 ## Group and project information
 
 ### Group members and zIDs
+
+- Rushmila Islam (z5456038)
 - Karim Adham (z5468227)
 - Rishantha Rajakaruna (z5441528) 
-- Rushmila Islam (z5456038) 
+ 
 
 
 ### Brief project description
 
-Describe your project in one paragraph.
+This research project focuses on short-term forecasting. We primarily use half
+hourly temperature, historical half hourly actual demand, calendar information (holidays,
+weekends) and time of the day as critical data sources. We analyse the relationship
+between demand and the features above in detail. We use two models,
+**XGBoost** and **Prophet by Meta** to forecast half hourly daily demand. By
+using multiple metrics, we compare the performance of each model. We also compare
+the results of the two models against the short-term demand forecast published
+by the Australian Energy Market Operator.
 
 ## Repository structure
 
 The repository has the following folder structure:
 
-- agendas: agendas for each weekly meeting with lecturers (left 24h before the next meeting)
-- checklists: teamwork checklist or a link to an account in a project task management tool
-- data: datasets for analysis
-- gantt_chart: Gantt chart or a link to an account in a project task management tool
-- minutes: minutes for each meeting (left not more than 24h after the corresponding meeting)
-- report: RMarkdown or Jupyter notebook report in progress
-- src: source code
+- data: Data used for analysis
+- gantt_chart: Contains the file which links to our overall project plan
+- models: The output of Prophet Model
+- report: RMarkdown and related artifacts used to generate the final project report
+- results: results of model predictions
+- src: source code used to prepare, analyse and build the model
