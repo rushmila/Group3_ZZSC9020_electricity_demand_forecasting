@@ -41,7 +41,7 @@ Accurate electricity demand forecasting is a fundamental decision-making compone
 
 Demand forecasting varies from short to medium and long-term. The parameters that influence each period type also vary. Short-term forecasting focuses on small time intervals, i.e., a few minutes to days. It can be heavily influenced by daily weather, time of day, and holidays. In the case of medium to long-term forecasts, the timeframe could vary from a few months to years into the future and be determined by long-term factors such as climate change, population growth, and government policy, to name a few.
 
-This research focuses on \textbf{short-term} forecasting. Therefore, we primarily use half hourly temperature, historical half hourly actual demand, calendar information (holidays, weekends) and time of the day as critical data sources. We analyse the relationship between demand and the  features above in detail.We use two models, \textbf{XGBoost} and \textbf{Prophet by Facebook} to forecast half hourly daily demand. By using multiple metrics, we compare the performance of each model. We also compare the results of the two models against the short-term demand forecast published by the Australian Energy Market Operator.
+This research focuses on \textbf{short-term} forecasting. Therefore, we primarily use half hourly temperature, historical half hourly actual demand, calendar information (holidays, weekends) and time of the day as critical data sources. We analyse the relationship between demand and the  features above in detail. We use two models, \textbf{XGBoost} and \textbf{Prophet by Facebook} to forecast half hourly daily demand. By using multiple metrics, we compare the performance of each model. We also compare the results of the two models against the short-term demand forecast published by the Australian Energy Market Operator.
 
 The findings will assist market participants in making informed decisions about short-term electricity demand forecasting and contribute to a more sustainable and efficient energy landscape.
 
@@ -62,7 +62,7 @@ According to \cite{nsw_epa_2021_energy_consumption} electricity demand from the 
 Load forecasting usually predicts hourly, daily, weekly, and annual values of the system demand and peak demand. Such forecasts are categorised as short-term, medium-term and long-term, depending on the time horizon. Regarding forecasting outputs, load forecasts can also be classified as point forecasts (i.e., forecasts of the mean or median of the future demand distribution) and density forecasts (i.e., estimates of the full probability distributions of the possible future demand values). As stated in \cite{nsw_epa_2021_energy_consumption} the driving factors of electricity consumption and demand, forecasts can be split into two different types: —1) structural, like population growth, economic condition, electricity price, energy efficiency etc., and 2) non-structural or random, like weather condition e.g., air temperature, extreme heat or cold, bushfire, flood, etc., building type e.g., multi-storey or free-standing house, and adoption of electric vehicles and contributions of renewable energy in the power grid, etc. Many factors drive consumers to make similar choices regarding electricity consumption. 
 
 
-The demand is different on weekdays, public holidays, and weekends due to weather, the use of heating and cooling appliances, and many other societal factors, such as whether the beach is pleasant or if retail promotions occur. Temperature is a crucial factor, as it directly influences electricity consumption patterns. Extreme temperatures, whether very hot or cold, can lead to higher demand for heating or cooling, respectively. Forecasts often need to account for temperature variations to predict demand more accurately, especially during seasonal extremes or unusual weather patterns.
+The demand is different on weekdays, public holidays, and weekends due to weather, the use of heating and cooling appliances, or many other societal factors, such as visiting the beach or going shopping instead of staying at home. Temperature is a crucial factor, as it directly influences electricity consumption patterns. Extreme temperatures, whether very hot or cold, can lead to higher demand for heating or cooling, respectively. Forecasts often need to account for temperature variations to predict demand more accurately, especially during seasonal extremes or unusual weather patterns.
 
 ```{=tex}
 \begin{figure}[H]
@@ -89,13 +89,13 @@ On the other hand, time series models focus on analysing historical load data to
 
 Researchers used statistical and probabilistic methods to achieve high accuracy with low errors to find the best model. They also considered this problem as deterministic and stochastic, including the influence of the external factors that sway the model's behaviour at different time horizons. As mentioned in \cite{9812604}, load forecasting, based on time horizon, can be classified into four forecasting groups – VSLTF (very short-term load forecasting), STLF (short-term load forecasting), MTLF (medium-term load forecasting), and LTLF (long-term load forecasting).
 
--   VSTLF: forecasts from minutes to hours (0-3h). It can deal with random variations in energy production and demand. It is used for real-time grid operation and control.
+-   VSTLF forecasts from minutes to hours (0-3h). It can deal with random variations in energy production and demand. It is used for real-time grid operation and control.
 
--   STLF: is used for forecasting ahead of a few minutes to a few days. It is vital in different grid operations involving reliability and dispatch analysis. Further, it helps avoid overestimating and underestimating energy demand and thus contributes substantially to grid reliability.
+-   STLF is used for forecasting ahead of a few minutes to a few days. It is vital in different grid operations involving reliability and dispatch analysis. Further, it helps avoid overestimating and underestimating energy demand and thus contributes substantially to grid reliability.
 
--   MTLF: In this method, the time scale expands from a few days to months ahead during a year. It helps with smart grid systems' maintenance, adequacy assessment, and fuel supply. Further, it plays a vital role in evaluating the financial attributes of energy systems by contributing to risk management.
+-   MTLF expands the time scale from a few days to months ahead during a year. It helps with smart grid systems' maintenance, adequacy assessment, and fuel supply. Further, it plays a vital role in evaluating the financial attributes of energy systems by contributing to risk management.
 
--   LTLF: This forecasting method involves a time scale ranging from months to even years. LTLF has been very important for production and load growth planning operations for a long time. Its significant advantage is that it can remove the effects of random fluctuations that occur in the short term and predict long-term trends.
+-   LTLF forecasting involves a time scale ranging from months to even years. LTLF has been very important for production and load growth planning operations for a long time. Its significant advantage is that it can remove the effects of random fluctuations that occur in the short term and predict long-term trends.
 
 \bigskip
 
@@ -108,7 +108,7 @@ Various techniques have been developed for electricity demand forecasting during
 
 Semi-parametric models, such as Generalized Additive Models (GAMs), combine parametric and non-parametric components. They allow for linear relationships between some variables while using smoothing functions to capture non-linear effects, offering a balance between interpretability and flexibility. A more recent and popular GAM for regression technique is Prophet, designed to handle business forecasting tasks featuring time series optimally captured hourly, daily, or weekly with ideally at least a full year of historical data \cite{taylor2017facebook}.
 
-Finally, non-parametric models like Random Forests, SVR, k-nearest Neighbors, and ANNs can capture complex, non-linear relationships but are computationally intensive and more challenging to interpret. Machine learning techniques, including ANNs, have successfully forecasted load by modelling non-linear interactions between load and weather variables.
+As per \cite{9812604}, non-parametric models like Random Forests, SVR, k-nearest Neighbors, and ANNs can capture complex, non-linear relationships but are computationally intensive and more challenging to interpret. Machine learning techniques, including ANNs, have successfully forecasted load by modelling non-linear interactions between load and weather variables.
 
 
 ```{=tex}
@@ -176,7 +176,7 @@ Multivariate models, incorporating additional factors like temperature, humidity
 
 \cite{Fan2012} proposes a semi-parametric additive models to estimate the relationships between demand and the driver variables. Specifically, the inputs for these models are calendar variables, lagged actual demand observations and historical and forecast temperature traces for one or more sites in the target power system. The proposed methodology has been used to forecast the half-hourly electricity demand for up to seven days ahead for power systems in the Australian National Electricity Market (NEM). To achieve more efficient and accurate load forecasting \cite{Suo} establishes a multi-dimensional short-term load forecasting model based on XGBoost. The decision forest composed of many decision trees is the final learning model of XGBoost. It tries to correct the residual of all the previous weak learners by adding new weak learners. When these learners are combined for final prediction the accuracy will be higher than that of a single learner. 
 
-The selection of appropriate hyper-parameters of XGBoost is directly related to the model's performance, but there is no universal scientific method to determine them. To reduce the randomness and blindness, a technique of hyper-parameter optimisation is proposed based on the second search of multi-dimensional grids. Each hyper-parameters combination is attempted in a grid traversal manner. In short-term demand forecasting, faster computation is essential due to the need for real-time or near-real-time predictions. Models like XGBoost are preferred over LSTM because of their speed, ability to handle large datasets, faster training time, and higher interpretability. However, limitations in computational power can impact the selection of models and their performance. This is especially critical when dealing with complex models or large-scale data, where ensuring optimal performance within available resources becomes a trade-off between prediction accuracy and computational feasibility 
+The selection of appropriate hyper-parameters of XGBoost is directly related to the model's performance, but there is no universal scientific method to determine them. To reduce the randomness and blindness, a technique of hyper-parameter optimisation is proposed based on the second search of multi-dimensional grids. Each hyper-parameters combination is attempted in a grid traversal manner. In short-term demand forecasting, faster computation is essential due to the need for real-time or near-real-time predictions. Models like XGBoost are preferred over LSTM because of their speed, ability to handle large datasets, faster training time, and higher interpretability. However, limitations in computational power can impact the selection of models and their performance. This is especially critical when dealing with complex models or large-scale data, where ensuring optimal performance within available resources becomes a trade-off between prediction accuracy and computational feasibility \cite{Suo}.
 
 ## Performance Metrics and Model Evaluations
 
@@ -904,7 +904,7 @@ model = Prophet(daily_seasonality = True,
                 seasonality_prior_scale=10)
 ```
 
-Additional regressors are used in the model and they are added to the linear part of the model using the `add_regressor` method. Based on the literature review, EDA and experimentation we have considered the following regressors for the Prophet model to forecast demand:
+Additional regressors are used in the model and they are added to the linear part of the model using the `add_regressor` method. Based on the literature review, EDA and experimentation with several univariate and multi-variate models we have considered the following regressors for the Prophet model to forecast demand:
 
 -   Continuous variable: `TEMPERATURE`, `lag_1`, `lag_2`, `lag_3`
 
@@ -1074,20 +1074,5 @@ For future work, we recommend expanding the dataset to include more features lik
 \bibliographystyle{elsarticle-harv} 
 \bibliography{references}
 ```
-# Appendix {.unnumbered}
-
-## **Figures** {.unnumbered}
-
-```{=tex}
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.5\textwidth,height=7cm]{renewable_fuel_sources_chart.png}
-\caption{Renewable fuel sources [Source:
-Derived from Department of the Environment and Energy, Australian Energy Statistics, Table O, June 2021]}\label{renewable}
-\end{figure}
-```
-
-
-## **Tables** {.unnumbered}
 
 

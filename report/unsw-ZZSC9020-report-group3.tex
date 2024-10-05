@@ -205,7 +205,7 @@ This research focuses on \textbf{short-term} forecasting. Therefore, we
 primarily use half hourly temperature, historical half hourly actual
 demand, calendar information (holidays, weekends) and time of the day as
 critical data sources. We analyse the relationship between demand and
-the features above in detail.We use two models, \textbf{XGBoost} and
+the features above in detail. We use two models, \textbf{XGBoost} and
 \textbf{Prophet by Facebook} to forecast half hourly daily demand. By
 using multiple metrics, we compare the performance of each model. We
 also compare the results of the two models against the short-term demand
@@ -268,9 +268,9 @@ factors drive consumers to make similar choices regarding electricity
 consumption.
 
 The demand is different on weekdays, public holidays, and weekends due
-to weather, the use of heating and cooling appliances, and many other
-societal factors, such as whether the beach is pleasant or if retail
-promotions occur. Temperature is a crucial factor, as it directly
+to weather, the use of heating and cooling appliances, or many other
+societal factors, such as visiting the beach or going shopping instead
+of staying at home. Temperature is a crucial factor, as it directly
 influences electricity consumption patterns. Extreme temperatures,
 whether very hot or cold, can lead to higher demand for heating or
 cooling, respectively. Forecasts often need to account for temperature
@@ -350,27 +350,27 @@ forecasting).
 
 \begin{itemize}
 \item
-  VSTLF: forecasts from minutes to hours (0-3h). It can deal with random
+  VSTLF forecasts from minutes to hours (0-3h). It can deal with random
   variations in energy production and demand. It is used for real-time
   grid operation and control.
 \item
-  STLF: is used for forecasting ahead of a few minutes to a few days. It
+  STLF is used for forecasting ahead of a few minutes to a few days. It
   is vital in different grid operations involving reliability and
   dispatch analysis. Further, it helps avoid overestimating and
   underestimating energy demand and thus contributes substantially to
   grid reliability.
 \item
-  MTLF: In this method, the time scale expands from a few days to months
-  ahead during a year. It helps with smart grid systems' maintenance,
-  adequacy assessment, and fuel supply. Further, it plays a vital role
-  in evaluating the financial attributes of energy systems by
-  contributing to risk management.
+  MTLF expands the time scale from a few days to months ahead during a
+  year. It helps with smart grid systems' maintenance, adequacy
+  assessment, and fuel supply. Further, it plays a vital role in
+  evaluating the financial attributes of energy systems by contributing
+  to risk management.
 \item
-  LTLF: This forecasting method involves a time scale ranging from
-  months to even years. LTLF has been very important for production and
-  load growth planning operations for a long time. Its significant
-  advantage is that it can remove the effects of random fluctuations
-  that occur in the short term and predict long-term trends.
+  LTLF forecasting involves a time scale ranging from months to even
+  years. LTLF has been very important for production and load growth
+  planning operations for a long time. Its significant advantage is that
+  it can remove the effects of random fluctuations that occur in the
+  short term and predict long-term trends.
 \end{itemize}
 
 \bigskip
@@ -406,11 +406,12 @@ is Prophet, designed to handle business forecasting tasks featuring time
 series optimally captured hourly, daily, or weekly with ideally at least
 a full year of historical data \cite{taylor2017facebook}.
 
-Finally, non-parametric models like Random Forests, SVR, k-nearest
-Neighbors, and ANNs can capture complex, non-linear relationships but
-are computationally intensive and more challenging to interpret. Machine
-learning techniques, including ANNs, have successfully forecasted load
-by modelling non-linear interactions between load and weather variables.
+As per \cite{9812604}, non-parametric models like Random Forests, SVR,
+k-nearest Neighbors, and ANNs can capture complex, non-linear
+relationships but are computationally intensive and more challenging to
+interpret. Machine learning techniques, including ANNs, have
+successfully forecasted load by modelling non-linear interactions
+between load and weather variables.
 
 \begin{table}[ht]
   \caption{Forecasting methods}\label{forecasting_methods}
@@ -535,7 +536,7 @@ limitations in computational power can impact the selection of models
 and their performance. This is especially critical when dealing with
 complex models or large-scale data, where ensuring optimal performance
 within available resources becomes a trade-off between prediction
-accuracy and computational feasibility
+accuracy and computational feasibility \cite{Suo}.
 
 \section{Performance Metrics and Model
 Evaluations}\label{performance-metrics-and-model-evaluations}
@@ -1617,8 +1618,9 @@ Final model parameters:
 
 Additional regressors are used in the model and they are added to the
 linear part of the model using the \texttt{add\_regressor} method. Based
-on the literature review, EDA and experimentation we have considered the
-following regressors for the Prophet model to forecast demand:
+on the literature review, EDA and experimentation with several
+univariate and multi-variate models we have considered the following
+regressors for the Prophet model to forecast demand:
 
 \begin{itemize}
 \item
@@ -1892,22 +1894,6 @@ forecasting.
 
 \bibliographystyle{elsarticle-harv} 
 \bibliography{references}
-
-\chapter*{Appendix}\label{appendix}
-\addcontentsline{toc}{chapter}{Appendix}
-
-\section*{\texorpdfstring{\textbf{Figures}}{Figures}}\label{figures}
-\addcontentsline{toc}{section}{\textbf{Figures}}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.5\textwidth,height=7cm]{renewable_fuel_sources_chart.png}
-\caption{Renewable fuel sources [Source:
-Derived from Department of the Environment and Energy, Australian Energy Statistics, Table O, June 2021]}\label{renewable}
-\end{figure}
-
-\section*{\texorpdfstring{\textbf{Tables}}{Tables}}\label{tables}
-\addcontentsline{toc}{section}{\textbf{Tables}}
 
 
 
